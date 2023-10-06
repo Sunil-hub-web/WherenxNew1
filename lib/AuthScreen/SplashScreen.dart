@@ -33,12 +33,13 @@ class _SplashScreenState extends State<SplashScreen> {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     User? user = FirebaseAuth.instance.currentUser;
 
-
     Timer(const Duration(seconds: 2),
             () => islogin == false ? user != null ?   Get.toNamed(RouteHelper.getHomeScreenpage()) :
                 Get.offNamed(RouteHelper.getIntroScreen())
          : Get.offNamed(RouteHelper.getHomeScreenpage())
     );
+
+
 
     // if(islogin == false){
     //   if (user != null) {

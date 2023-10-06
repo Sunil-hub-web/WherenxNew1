@@ -53,7 +53,7 @@ class Result {
   String? placeId;
   PlusCode? plusCode;
   int? priceLevel;
-  double? rating;
+  dynamic rating;
   String? reference;
   bool? reservable;
   List<Reviews>? reviews;

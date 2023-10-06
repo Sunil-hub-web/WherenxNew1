@@ -25,6 +25,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../modelclass/ShowVideoReviewResponse.dart';
+import '../videorecording/VideoViewInPath.dart';
 
 enum Share {
   facebook,
@@ -70,13 +71,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
     SharedPreferences pre = await SharedPreferences.getInstance();
     placeId = pre.getString("placeId") ?? "";
 
-    var url = Uri.parse(
-        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$googleApikey');
+    var url = Uri.parse('https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$googleApikey');
     var response = await http.get(url);
     singlePageDetails = SinglePageDetails.fromJson(jsonDecode(response.body));
 
+
     String photo = singlePageDetails.result!.photos?[0].photoReference ?? "";
-    double rating = singlePageDetails.result?.rating ?? 0.0;
+    var rating = singlePageDetails.result?.rating;
     strrating = rating.toString();
     reviewlist = singlePageDetails.result?.reviews?.length.toString() ?? "";
 
@@ -85,8 +86,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
     SharedPreferences pre1 = await SharedPreferences.getInstance();
     pre.setString("placename", singlePageDetails.result!.name!);
     pre.setString("placeType", singlePageDetails.result!.types![0]);
-    pre.setString("profileImage", singlePageDetails.result!.photos![0].photoReference!);
-    pre.setInt("profileImagehight", singlePageDetails.result!.photos![0].width!);
+    pre.setString("profileImage", singlePageDetails.result?.photos?[0].photoReference ?? "");
+    pre.setInt("profileImagehight", singlePageDetails.result?.photos?[0].width ?? 0);
 
     if(reviewlist.length == 1){
       reviewlist1 = "0"+reviewlist+"  Reviews";
@@ -732,7 +733,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "${singlePageDetails.result?.rating ?? 0.0.toString()}",
+                                        "${singlePageDetails.result?.rating}",
                                         style: TextStyle(color: Colors.black, fontSize: 18, height: 1.8,),
                                       ),
                                       const SizedBox(width: 2,),
@@ -740,7 +741,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         child: Container(
                                           padding: const EdgeInsets.symmetric(vertical: 1),
                                           child:RatingBarIndicator(
-                                            rating: singlePageDetails.result?.rating ?? 0.0,
+                                            rating: double.parse(singlePageDetails.result?.rating),
                                             itemBuilder: (context, index) => Icon(
                                               Icons.star,
                                               color: Colors.amber,
@@ -785,8 +786,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.only(left: 12, right: 12,)),
                                       ),
                                       onPressed: () {
-                                        Get.toNamed(
-                                            RouteHelper.getaddreviewScreen());
+                                        Get.toNamed(RouteHelper.getaddreviewScreen());
                                       },
                                       child: Row (
                                         children: <Widget>[
@@ -906,6 +906,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               pre.setString("videoreview", videoreviewDet[index].video!);
                                               pre.setString("videorating", videoreviewDet[index].rating!);
                                               Get.toNamed(RouteHelper.getVideoReviewDetailsScreen());
+
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          VideoViewInPath(filePath: videoreviewDet[index].video!)));
                                             },
                                             child: Container(
                                               width: 140,
