@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1093724407380",
+    "project_id": "fir-connect-c03a9",
+    "storage_bucket": "fir-connect-c03a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093724407380:android:bea980d685d2e45e6ecfc1",
+        "android_client_info": {
+          "package_name": "com.wherenx.wherenxnew1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSjj-tqE74EFDoO9cQoNd_Kx9rZxxDQvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
