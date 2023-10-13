@@ -293,7 +293,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       centerTitle: true,
                       // background: Image(image:
                       //Image.asset("assets/images/food-image.png",fit: BoxFit.cover,), ),
-                      background: singlePageDetails.result?.photos![0].photoReference! == null ?
+                      background: singlePageDetails.result?.photos![0].photoReference == null ?
                       Image.asset(Img.get('food-image.png'), fit: BoxFit.cover) :
                       getImage("${singlePageDetails.result?.photos?[0].photoReference}","${singlePageDetails.result?.photos?[0].width}"),
 
@@ -733,7 +733,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "${singlePageDetails.result?.rating}",
+                                        singlePageDetails.result!.rating.toString(),
                                         style: TextStyle(color: Colors.black, fontSize: 18, height: 1.8,),
                                       ),
                                       const SizedBox(width: 2,),
@@ -741,7 +741,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         child: Container(
                                           padding: const EdgeInsets.symmetric(vertical: 1),
                                           child:RatingBarIndicator(
-                                            rating: double.parse(singlePageDetails.result?.rating),
+                                            rating: 4.0/*double.parse(singlePageDetails.result?.rating)*/,
                                             itemBuilder: (context, index) => Icon(
                                               Icons.star,
                                               color: Colors.amber,
@@ -907,11 +907,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               pre.setString("videorating", videoreviewDet[index].rating!);
                                               Get.toNamed(RouteHelper.getVideoReviewDetailsScreen());
 
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          VideoViewInPath(filePath: videoreviewDet[index].video!)));
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => VideoViewInPath(filePath: videoreviewDet[index].video!)));
+
                                             },
                                             child: Container(
                                               width: 140,

@@ -28,8 +28,10 @@ class _VideoViewInPathState extends State<VideoViewInPath> {
     File file = new File(widget.filePath);
     final info = await FileCompressionApi.compressVideo(file);
 
+    print("widgetfilePath${"https://www.2designnerds.com/wherenx_user/public/"+widget.filePath}");
+
     // MediaInfo? compressedVideoInfo = info;
-    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(widget.filePath));
+    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse("https://www.2designnerds.com/wherenx_user/public/${widget.filePath}"));
     await _videoPlayerController?.initialize();
     await _videoPlayerController?.setLooping(true);
     await _videoPlayerController?.play();

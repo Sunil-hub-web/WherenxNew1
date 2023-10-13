@@ -503,7 +503,7 @@ class Reviews {
   String? language;
   String? originalLanguage;
   String? profilePhotoUrl;
-  int? rating;
+  dynamic rating;
   String? relativeTimeDescription;
   String? text;
   int? time;
