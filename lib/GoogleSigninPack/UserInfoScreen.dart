@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../AuthScreen/SignInScreen.dart';
-import 'Authentication.dart';
 import 'Authentication_signOut.dart';
 
 class UserInfoScreen extends StatefulWidget {

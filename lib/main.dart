@@ -4,7 +4,6 @@ import 'package:wherenxnew1/AuthScreen/SignInScreen.dart';
 import 'package:wherenxnew1/GoogleSigninPack/GoogleSignInScreen.dart';
 import 'package:wherenxnew1/UserScerrn/MyPinsScreen.dart';
 
-import 'AuthScreen/SplashScreen.dart';
 import 'Routes/RouteHelper.dart';
 
 void main() {

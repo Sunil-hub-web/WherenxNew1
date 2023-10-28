@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wherenxnew1/AuthScreen/LoginScreen.dart';
 import 'package:wherenxnew1/AuthScreen/OtpScreen.dart';
 import 'package:wherenxnew1/UserScerrn/DelightsScreen.dart';
-import '../Dimension.dart';
 import 'ExploreScreen.dart';
 import 'MyPinsScreen.dart';
 import 'UserProfile.dart';

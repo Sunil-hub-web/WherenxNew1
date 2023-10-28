@@ -2009,7 +2009,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
     String str_userId = userId.toString();
 
-    http.Response response = await AddKMRadius().addkmRadius(str_userId, Radius!);
+    http.Response response = await AddKMRadius().addkmRadius(str_userId, Radius);
     var jsonResponse = jsonDecode(response.body);
     var userResponse = SuccessResponseKM.fromJson(jsonResponse);
 

@@ -10,8 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wherenxnew1/Dimension.dart';
 
 import '../Routes/RouteHelper.dart';
-import '../UserScerrn/HomeScreen.dart';
-import 'IntroScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);

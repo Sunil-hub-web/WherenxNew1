@@ -27,7 +27,6 @@ import 'package:http/http.dart' as http;
 
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../modelclass/UserRegister.dart';
 
 enum Share {
   facebook,

@@ -11,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wherenxnew1/ApiImplement/ViewDialog.dart';
 import '../ApiCallingPage/OTPVerifaction.dart';
 import '../ApiCallingPage/SigninPage.dart';
-import '../ApiImplement/ApiUrl.dart';
 import '../Controller/OtpController.dart';
 import '../modelclass/ShowLoginData.dart';
 import '../modelclass/logindata.dart';

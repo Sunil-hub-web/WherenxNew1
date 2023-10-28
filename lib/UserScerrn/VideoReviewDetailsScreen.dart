@@ -4,11 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 import '../Dimension.dart';
-import '../Helper/img.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../Routes/RouteHelper.dart';
 
 class VideoReviewDetailsScreen extends StatefulWidget {
   const VideoReviewDetailsScreen({super.key});
