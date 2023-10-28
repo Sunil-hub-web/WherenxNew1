@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:progress_dialog_null_safe/progress_dialog_null_safe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -97,11 +96,11 @@ class _ProfileEditState extends State<ProfileEdit> {
     islogin = pre.getBool("islogin") ?? false;
     userId = pre.getInt("userId") ?? 0;
 
-    String str_userId = userId.toString();
+    String strUserid = userId.toString();
 
     print(userId);
 
-    http.Response? response = await ViewUserProfileImage().getProfileImage(str_userId);
+    http.Response? response = await ViewUserProfileImage().getProfileImage(strUserid);
     var jsonResponse = jsonDecode(response.body);
     var userResponse1 = ProfileImageResponse.fromJson(jsonResponse);
 
@@ -770,11 +769,11 @@ class _ProfileEditState extends State<ProfileEdit> {
 
                                       pr6.show();
 
-                                      String str_userId = userId.toString();
+                                      String strUserid = userId.toString();
 
                                       http.Response? response =
                                       await UpdateUserData().updateuserDet(
-                                          str_userId,
+                                          strUserid,
                                           fullnameController.text.toString(),
                                           mobileNoController.text.toString(),
                                           dropdownCountry!,
@@ -784,15 +783,15 @@ class _ProfileEditState extends State<ProfileEdit> {
                                       var jsonResponse =
                                       json.decode(response!.body);
 
-                                      var user_Upadte =
+                                      var userUpadte =
                                       UpdateUser.fromJson(jsonResponse);
 
-                                      if (user_Upadte.status == "Success") {
+                                      if (userUpadte.status == "Success") {
 
                                         pr6.hide();
 
                                         Fluttertoast.showToast(
-                                            msg: user_Upadte.message!,
+                                            msg: userUpadte.message!,
                                             toastLength: Toast.LENGTH_SHORT,
                                             gravity: ToastGravity.BOTTOM,
                                             timeInSecForIosWeb: 1,
@@ -800,7 +799,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                                             textColor: Colors.white,
                                             fontSize: 16.0);
 
-                                        UserInfo? userInfo = user_Upadte.userInfo!;
+                                        UserInfo? userInfo = userUpadte.userInfo!;
 
                                         SharedPreferences pre = await SharedPreferences.getInstance();
                                         pre.setString("name", userInfo.name!); //save integer
@@ -817,7 +816,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                                         pr6.hide();
 
                                         Fluttertoast.showToast(
-                                            msg: user_Upadte.message!,
+                                            msg: userUpadte.message!,
                                             toastLength: Toast.LENGTH_SHORT,
                                             gravity: ToastGravity.BOTTOM,
                                             timeInSecForIosWeb: 1,
@@ -898,9 +897,9 @@ class _ProfileEditState extends State<ProfileEdit> {
                     islogin = pre.getBool("islogin") ?? false;
                     userId = pre.getInt("userId") ?? 0;
 
-                    String str_userId = userId.toString();
+                    String strUserid = userId.toString();
 
-                    http.StreamedResponse? response = await UpdateProfileImage().updateImageProfile(str_userId, image!.path);
+                    http.StreamedResponse? response = await UpdateProfileImage().updateImageProfile(strUserid, image!.path);
 
                     print(await response!.stream.bytesToString());
 

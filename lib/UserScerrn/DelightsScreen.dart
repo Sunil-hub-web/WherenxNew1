@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:progress_dialog_null_safe/progress_dialog_null_safe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wherenxnew1/ApiCallingPage/ViewDelight_List.dart';
@@ -123,9 +122,9 @@ class _DelightsScreenState extends State<DelightsScreen> {
 
     namelist.clear();
 
-    String str_userId = userId.toString();
+    String strUserid = userId.toString();
 
-    http.Response response = await ViewDelight_List().getDelightList(str_userId);
+    http.Response response = await ViewDelight_List().getDelightList(strUserid);
     var jsonResponse = json.decode(response.body);
     var delightlistResponse = ViewDelightList.fromJson(jsonResponse);
 
@@ -498,7 +497,7 @@ class _DelightsScreenState extends State<DelightsScreen> {
 
                           SharedPreferences pre = await SharedPreferences.getInstance();
                           int userId = pre.getInt("userId") ?? 0;
-                          String user_id = userId.toString();
+                          String strUserid = userId.toString();
 
                           if(namelist.isNotEmpty){
 
@@ -515,11 +514,11 @@ class _DelightsScreenState extends State<DelightsScreen> {
                               print(concatenate);
 
 
-                              http.Response response = await InsertDelightList().getinsertDelight(user_id,concatenate);
+                              http.Response response = await InsertDelightList().getinsertDelight(strUserid,concatenate);
                               var jsonResponse = json.decode(response.body);
                               var delightlist = SuccessResponse.fromJson(jsonResponse);
 
-                              print("$user_id,$concatenate");
+                              print("$userId,$concatenate");
 
                               if(delightlist.status == "success"){
 

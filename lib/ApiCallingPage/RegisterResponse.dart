@@ -4,7 +4,7 @@ import 'dart:developer';
 import '../ApiImplement/ApiUrl.dart';
 import 'package:http/http.dart' as http;
 
-Future<http.Response?> userRegister(String fullname,String email,String country,String state,String city) async {
+Future<http.Response?> userRegister_det(String fullname,String email,String country,String state,String city) async {
   http.Response? response;
 
   try {

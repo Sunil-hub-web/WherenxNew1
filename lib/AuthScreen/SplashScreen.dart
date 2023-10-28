@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -31,8 +30,10 @@ class _SplashScreenState extends State<SplashScreen> {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     User? user = FirebaseAuth.instance.currentUser;
 
+   //  Get.offNamed(RouteHelper.getIntroScreen());
+
     Timer(const Duration(seconds: 2),
-            () => islogin == false ? user != null ?   Get.toNamed(RouteHelper.getHomeScreenpage()) :
+            () => islogin == false ? user != null ?  Get.toNamed(RouteHelper.getHomeScreenpage()) :
                 Get.offNamed(RouteHelper.getIntroScreen())
          : Get.offNamed(RouteHelper.getHomeScreenpage())
     );

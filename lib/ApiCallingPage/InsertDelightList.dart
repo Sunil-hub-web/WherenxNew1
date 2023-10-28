@@ -6,7 +6,7 @@ import 'package:wherenxnew1/ApiImplement/ApiUrl.dart';
 
 class InsertDelightList{
 
-  Future<http.Response> getinsertDelight(String user_id,String delight_id) async{
+  Future<http.Response> getinsertDelight(String userId,String delightId) async{
 
     http.Response response;
 
@@ -14,7 +14,7 @@ class InsertDelightList{
       headers: <String, String> {
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{'user_id': user_id, 'delight_id': delight_id}));
+      body: jsonEncode(<String, String>{'user_id': userId, 'delight_id': delightId}));
 
     return response;
 

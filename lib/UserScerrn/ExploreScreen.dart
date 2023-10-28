@@ -4,13 +4,11 @@ import 'dart:math';
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:custom_info_window/custom_info_window.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:progress_dialog_null_safe/progress_dialog_null_safe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -201,7 +199,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   bool isVisible = false;
 
-  double startlatitude1 = 0.0,startlongitude1 = 0.0,radiusData = 0.0;
+  double startlatitude1 = 0.0,startlongitude1 = 0.0,dob_radiusData = 0.0;
 
   Future<List<UserInfo>> showDelightList() async {
     //elightlistName1.clear();
@@ -209,12 +207,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
     SharedPreferences pre = await SharedPreferences.getInstance();
     islogin = pre.getBool("islogin") ?? false;
     userId = pre.getInt("userId") ?? 0;
-    radiusData = pre.getDouble("radiusData") ?? 0.0;
+    dob_radiusData = pre.getDouble("radiusData") ?? 0.0;
 
-    String radius_Data = radiusData.toString();
-    _radius3 = radius_Data;
+    String radiusData = dob_radiusData.toString();
+    _radius3 = radiusData;
 
-    print("dataradis${radiusData}");
+    print("dataradis$radiusData");
+    print("userIddataradis$userId");
 
     String strUserid = userId.toString();
 
@@ -305,8 +304,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
     startlongitude1 = position.longitude;
 
     if (kDebugMode) {
-      print("latitudedetails1 ${startlatitude1}");
-      print("latitudedetails1 ${startlongitude1}");
+      print("latitudedetails1 $startlatitude1");
+      print("latitudedetails1 $startlongitude1");
     }
 
     for (int i = 0;i<elightlistName1.length;i++){
@@ -476,7 +475,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 // components: [Component(Component.country, 'us')],
                                 //google_map_webservice package
                                 onError: (err) {
-                                  print(err);
+                                  print("errordetails ${err}");
                                 });
 
                             if (place != null) {
@@ -487,13 +486,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               //form google_maps_webservice package
                               final plist = GoogleMapsPlaces(
                                 apiKey: googleApikey,
-                                apiHeaders: await GoogleApiHeaders()
-                                    .getHeaders(),
+                                apiHeaders: await GoogleApiHeaders().getHeaders(),
                                 //from google_api_headers package
                               );
                               String placeid = place.placeId ?? "0";
-                              final detail =
-                              await plist.getDetailsByPlaceId(placeid);
+                              final detail = await plist.getDetailsByPlaceId(placeid);
                               final geometry = detail.result.geometry!;
                               final lat = geometry.location.lat;
                               final lang = geometry.location.lng;
@@ -656,10 +653,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   margin: EdgeInsets.only(
                       left: Dimensions.size7,
                       top: Dimensions.size135,
-                      right: Dimensions.size10,
-                      bottom: 0),
-                  child: nearbyLocations.isNotEmpty
-                      ? Column(
+                      right: Dimensions.size10, bottom: 0),
+                  child: nearbyLocations.isNotEmpty ? Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,
                     mainAxisSize: MainAxisSize.max,
@@ -671,8 +666,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: nearbyLocations.length,
-                              itemBuilder:
-                                  (context, int index) =>
+                              itemBuilder: (context, int index) =>
                                   GestureDetector(
                                     onTap: () async {
                                       SharedPreferences pre = await SharedPreferences.getInstance();
@@ -682,10 +676,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                     },
                                     child: SingleChildScrollView(
                                       child: Container(
-                                          width: MediaQuery
-                                              .of(context)
-                                              .size
-                                              .width,
+                                          width: MediaQuery.of(context).size.width,
                                           margin: EdgeInsets.all(5),
                                           decoration: BoxDecoration(
                                             borderRadius:
@@ -712,24 +703,15 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                               top: 0,
                                               bottom: 10,
                                             ),
-                                            width: MediaQuery
-                                                .of(context)
-                                                .size
-                                                .width,
-                                            height: MediaQuery
-                                                .of(context)
-                                                .size
-                                                .width /
-                                                2.5,
+                                            width: MediaQuery.of(context).size.width,
+                                            height: MediaQuery.of(context).size.width / 2.5,
                                             child: Card(
                                               elevation: 5,
                                               shadowColor: Colors.black12,
                                               color: Colors.white,
-                                              shape:
-                                              RoundedRectangleBorder(
+                                              shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                BorderRadius.circular(
-                                                    18),
+                                                BorderRadius.circular(18),
                                               ),
                                               child: Row(
                                                 children: [
@@ -738,53 +720,22 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                       child: Container(
                                                         height: 130,
                                                         decoration: BoxDecoration(
-                                                            color: Colors
-                                                                .white,
+                                                            color: Colors.white,
                                                             borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                20)),
+                                                            BorderRadius.circular(20)),
                                                         width: 100,
-                                                        margin: EdgeInsets
-                                                            .only(
-                                                            top: 10,
-                                                            left: 10,
-                                                            right: 10,
-                                                            bottom:
-                                                            10),
+                                                        margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
                                                         child: ClipRRect(
                                                           borderRadius:
-                                                          BorderRadius
-                                                              .circular(
-                                                              20),
+                                                          BorderRadius.circular(20),
                                                           // Image border
-                                                          child: SizedBox
-                                                              .fromSize(
-                                                            size: Size
-                                                                .fromRadius(
-                                                                48),
+                                                          child: SizedBox.fromSize(
+                                                            size: Size.fromRadius(48),
                                                             // Image radius
-                                                            child: nearbyLocations[index]
-                                                                .photos?[
-                                                            0]
-                                                                .photoReference ==
-                                                                null
-                                                                ? Image
-                                                                .network(
-                                                              nearbyLocations[index]
-                                                                  .icon!,
-                                                              height:
-                                                              Dimensions
-                                                                  .size100,
-                                                              width:
-                                                              Dimensions
-                                                                  .size100,
-                                                            )
-                                                                : getImage(
-                                                                "${nearbyLocations[index]
-                                                                    .photos?[0]
-                                                                    .photoReference}","${nearbyLocations[index]
-                                                                .photos?[0].width}") /*Image.network(nearbyLocations[index].icon!,)*/,
+                                                            child: nearbyLocations[index].photos?[0].photoReference == null ? Image.network(nearbyLocations[index].icon!,
+                                                              height: Dimensions.size100,
+                                                              width: Dimensions.size100,) :
+                                                            getImage("${nearbyLocations[index].photos?[0].photoReference}","${nearbyLocations[index].photos?[0].width}") /*Image.network(nearbyLocations[index].icon!,)*/,
                                                           ),
                                                         ),
                                                       )),
@@ -795,93 +746,53 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                         scrollDirection:
                                                         Axis.vertical,
                                                         child: Container(
-                                                          margin: EdgeInsets
-                                                              .only(
-                                                              left: 2,
-                                                              right:
-                                                              2,
-                                                              top:
-                                                              10),
+                                                          margin: EdgeInsets.only(left: 2, right: 2, top: 10),
                                                           child: Column(
-                                                            mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            mainAxisSize:
-                                                            MainAxisSize
-                                                                .max,
+                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisSize: MainAxisSize.max,
                                                             children: [
                                                               Row(
-                                                                mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
+                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                 children: [
                                                                   Expanded(
                                                                     child:
                                                                     Text(
-                                                                      nearbyLocations[index]
-                                                                          .name!,
+                                                                      nearbyLocations[index].name!,
                                                                       style: TextStyle(
                                                                           fontSize: 14,
-                                                                          color: Colors
-                                                                              .black,
-                                                                          fontWeight: FontWeight
-                                                                              .normal),
+                                                                          color: Colors.black,
+                                                                          fontWeight: FontWeight.normal),
                                                                     ),
                                                                   ),
                                                                   Container(
-                                                                    height:
-                                                                    30,
-                                                                    child:
-                                                                    TextButton(
-                                                                      style:
-                                                                      ButtonStyle(
-                                                                        backgroundColor: MaterialStateProperty
-                                                                            .all<
-                                                                            Color>(
-                                                                            Colors
-                                                                                .white),
+                                                                    height: 30,
+                                                                    child: TextButton(style:
+                                                                      ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
                                                                       ),
-                                                                      onPressed:
-                                                                          () {},
+                                                                      onPressed: () {},
                                                                       child:
                                                                       Row(
                                                                         children: <
                                                                             Widget>[
-                                                                          SvgPicture
-                                                                              .asset(
-                                                                            'assets/images/star.svg',
+                                                                          SvgPicture.asset('assets/images/star.svg',
                                                                             width: 18,
-                                                                            color: Color(
-                                                                                0xFFF9BF3A),
+                                                                            color: Color(0xFFF9BF3A),
                                                                           ),
                                                                           SizedBox(
                                                                             width: 2,
                                                                           ),
-                                                                          nearbyLocations[index]
-                                                                              .rating !=
-                                                                              null
-                                                                              ? Text(
-                                                                            nearbyLocations[index]
-                                                                                .rating
-                                                                                .toString(),
+                                                                          nearbyLocations[index].rating != null ? Text(nearbyLocations[index].rating.toString(),
                                                                             style: TextStyle(
                                                                                 fontSize: 11,
-                                                                                color: Color(
-                                                                                    0xFF616768),
-                                                                                fontWeight: FontWeight
-                                                                                    .normal),
+                                                                                color: Color(0xFF616768),
+                                                                                fontWeight: FontWeight.normal),
                                                                           )
-                                                                              : Text(
-                                                                            "0",
+                                                                              : Text("0",
                                                                             style: TextStyle(
                                                                                 fontSize: 11,
-                                                                                color: Color(
-                                                                                    0xFF616768),
-                                                                                fontWeight: FontWeight
-                                                                                    .normal),
+                                                                                color: Color(0xFF616768),
+                                                                                fontWeight: FontWeight.normal),
                                                                           ),
                                                                           // text
                                                                         ],
@@ -896,29 +807,20 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                    nearbyLocations[index]
-                                                                        .types![0],
-                                                                    overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
+                                                                    nearbyLocations[index].types![0],
+                                                                    overflow: TextOverflow.ellipsis,
                                                                     style: TextStyle(
                                                                         fontSize: 12,
-                                                                        color: Colors
-                                                                            .grey[500],
-                                                                        fontWeight: FontWeight
-                                                                            .normal),
+                                                                        color: Colors.grey[500],
+                                                                        fontWeight: FontWeight.normal),
                                                                   ),
-                                                                  Text(
-                                                                    "",
+                                                                  Text("",
                                                                     overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
+                                                                    TextOverflow.ellipsis,
                                                                     style: TextStyle(
                                                                         fontSize: 11,
-                                                                        color: Colors
-                                                                            .grey[500],
-                                                                        fontWeight: FontWeight
-                                                                            .normal),
+                                                                        color: Colors.grey[500],
+                                                                        fontWeight: FontWeight.normal),
                                                                   ),
                                                                 ],
                                                               ),
@@ -928,48 +830,29 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                    nearbyLocations[index]
-                                                                        .businessStatus ==
-                                                                        "OPERATIONAL"
-                                                                        ? "open"
-                                                                        : "close",
-                                                                    overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
+                                                                    nearbyLocations[index].businessStatus == "OPERATIONAL" ? "open" : "close",
+                                                                    overflow: TextOverflow.ellipsis,
                                                                     style: TextStyle(
                                                                         fontSize: 12,
-                                                                        color: Colors
-                                                                            .grey[500],
-                                                                        fontWeight: FontWeight
-                                                                            .normal),
+                                                                        color: Colors.grey[500],
+                                                                        fontWeight: FontWeight.normal),
                                                                   ),
                                                                 ],
                                                               ),
                                                               SizedBox(
-                                                                height:
-                                                                10,
+                                                                height: 10,
                                                               ),
                                                               Row(
                                                                 children: [
                                                                   Container(
-                                                                    height:
-                                                                    35,
+                                                                    height: 35,
                                                                     child:
                                                                     TextButton(
                                                                       style:
                                                                       ButtonStyle(
-                                                                        backgroundColor: MaterialStateProperty
-                                                                            .all<
-                                                                            Color>(
-                                                                            Colors
-                                                                                .white),
-                                                                        shape: MaterialStateProperty
-                                                                            .all<
-                                                                            RoundedRectangleBorder>(
-                                                                            RoundedRectangleBorder(
-                                                                              borderRadius: BorderRadius
-                                                                                  .circular(
-                                                                                  50.0),
+                                                                        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                                                          borderRadius: BorderRadius.circular(50.0),
                                                                               side: BorderSide(
                                                                                 color: Color(
                                                                                     0xFFDDE4E4),
@@ -978,24 +861,14 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                         padding: MaterialStateProperty
                                                                             .all<
                                                                             EdgeInsets>(
-                                                                            EdgeInsets
-                                                                                .only(
-                                                                              left: 12,
-                                                                              right: 12,
-                                                                            )),
+                                                                            EdgeInsets.only(left: 12, right: 12,)),
                                                                       ),
-                                                                      onPressed:
-                                                                          () {},
+                                                                      onPressed: () {},
                                                                       child:
                                                                       Row(
-                                                                        children: <
-                                                                            Widget>[
-                                                                          SvgPicture
-                                                                              .asset(
-                                                                            'assets/images/direction-icon.svg',
+                                                                        children: <Widget>[SvgPicture.asset('assets/images/direction-icon.svg',
                                                                             width: 18,
-                                                                            color: Color(
-                                                                                0xFF00B8CA),
+                                                                            color: Color(0xFF00B8CA),
                                                                           ),
                                                                           SizedBox(
                                                                             width: 5,
@@ -1004,10 +877,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                             "Directions",
                                                                             style: TextStyle(
                                                                                 fontSize: 11,
-                                                                                color: Color(
-                                                                                    0xFF00B8CA),
-                                                                                fontWeight: FontWeight
-                                                                                    .normal),
+                                                                                color: Color(0xFF00B8CA),
+                                                                                fontWeight: FontWeight.normal),
                                                                           ),
                                                                           // text
                                                                         ],
@@ -1015,36 +886,19 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                     ),
                                                                   ),
                                                                   SizedBox(
-                                                                      width:
-                                                                      10),
+                                                                      width: 10),
                                                                   Container(
-                                                                    height:
-                                                                    36,
+                                                                    height: 36,
                                                                     decoration:
                                                                     BoxDecoration(
                                                                       borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                          25),
-                                                                      gradient:
-                                                                      LinearGradient(
-                                                                          begin: Alignment
-                                                                              .topCenter,
-                                                                          end: Alignment
-                                                                              .bottomCenter,
+                                                                      BorderRadius.circular(25),
+                                                                      gradient: LinearGradient(
+                                                                          begin: Alignment.topCenter,
+                                                                          end: Alignment.bottomCenter,
                                                                           colors: [
-                                                                            Color
-                                                                                .fromRGBO(
-                                                                                31,
-                                                                                203,
-                                                                                220,
-                                                                                1),
-                                                                            Color
-                                                                                .fromRGBO(
-                                                                                0,
-                                                                                184,
-                                                                                202,
-                                                                                1)
+                                                                            Color.fromRGBO(31, 203, 220, 1),
+                                                                            Color.fromRGBO(0, 184, 202, 1)
                                                                           ]),
                                                                     ),
                                                                     child:
@@ -1054,44 +908,19 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                           .styleFrom(
                                                                         foregroundColor: Colors
                                                                             .white,
-                                                                        padding: EdgeInsets
-                                                                            .only(
-                                                                            left: 12,
-                                                                            right: 12,
-                                                                            top: 5.0,
-                                                                            bottom: 5.0),
-                                                                        textStyle: TextStyle(
-                                                                            fontSize: 13),
+                                                                        padding: EdgeInsets.only(left: 12, right: 12, top: 5.0, bottom: 5.0),
+                                                                        textStyle: TextStyle(fontSize: 13),
                                                                       ),
-                                                                      onPressed:
-                                                                          () async {
-                                                                        pr4
-                                                                            .show();
+                                                                      onPressed: () async {
+                                                                        pr4.show();
 
-                                                                        SharedPreferences pre = await SharedPreferences
-                                                                            .getInstance();
-                                                                        final islogin = pre
-                                                                            .getBool(
-                                                                            "islogin") ??
-                                                                            false;
-                                                                        final userId = pre
-                                                                            .getInt(
-                                                                            "userId") ??
-                                                                            0;
-                                                                        final struserId = userId
-                                                                            .toString();
-                                                                        final strlat = nearbyLocations[index]
-                                                                            .geometry
-                                                                            ?.location
-                                                                            ?.lat
-                                                                            .toString();
-                                                                        final strlng = nearbyLocations[index]
-                                                                            .geometry
-                                                                            ?.location
-                                                                            ?.lng
-                                                                            .toString();
-                                                                        final placeid = nearbyLocations[index]
-                                                                            .placeId!;
+                                                                        SharedPreferences pre = await SharedPreferences.getInstance();
+                                                                        final islogin = pre.getBool("islogin") ?? false;
+                                                                        final userId = pre.getInt("userId") ?? 0;
+                                                                        final struserId = userId.toString();
+                                                                        final strlat = nearbyLocations[index].geometry?.location?.lat.toString();
+                                                                        final strlng = nearbyLocations[index].geometry?.location?.lng.toString();
+                                                                        final placeid = nearbyLocations[index].placeId!;
 
                                                                         http.Response response = await PinPlaces().insertPinPlaces(
                                                                             struserId, delightId, nearbyLocations[index].types![0], placeid, strlat!, strlng!, nearbyLocations[index].name!,
@@ -1102,75 +931,47 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                         print(
                                                                             response);
 
-                                                                        var pinResponse = jsonDecode(
-                                                                            response
-                                                                                .body);
-                                                                        var userResponse = PinThePlace
-                                                                            .fromJson(
-                                                                            pinResponse);
+                                                                        var pinResponse = jsonDecode(response.body);
+                                                                        var userResponse = PinThePlace.fromJson(pinResponse);
 
-                                                                        if (userResponse
-                                                                            .status ==
-                                                                            "200") {
-                                                                          pr4
-                                                                              .hide();
+                                                                        if (userResponse.status == "200") {
+                                                                          pr4.hide();
 
-                                                                          Fluttertoast
-                                                                              .showToast(
-                                                                              msg: userResponse
-                                                                                  .message!,
-                                                                              toastLength: Toast
-                                                                                  .LENGTH_SHORT,
-                                                                              gravity: ToastGravity
-                                                                                  .BOTTOM,
+                                                                          Fluttertoast.showToast(
+                                                                              msg: userResponse.message!,
+                                                                              toastLength: Toast.LENGTH_SHORT,
+                                                                              gravity: ToastGravity.BOTTOM,
                                                                               timeInSecForIosWeb: 1,
-                                                                              backgroundColor: Colors
-                                                                                  .green,
-                                                                              textColor: Colors
-                                                                                  .white,
+                                                                              backgroundColor: Colors.green,
+                                                                              textColor: Colors.white,
                                                                               fontSize: 16.0);
                                                                         } else {
-                                                                          pr4
-                                                                              .hide();
+                                                                          pr4.hide();
 
-                                                                          Fluttertoast
-                                                                              .showToast(
-                                                                              msg: userResponse
-                                                                                  .message!,
-                                                                              toastLength: Toast
-                                                                                  .LENGTH_SHORT,
-                                                                              gravity: ToastGravity
-                                                                                  .BOTTOM,
+                                                                          Fluttertoast.showToast(
+                                                                              msg: userResponse.message!,
+                                                                              toastLength: Toast.LENGTH_SHORT,
+                                                                              gravity: ToastGravity.BOTTOM,
                                                                               timeInSecForIosWeb: 1,
-                                                                              backgroundColor: Colors
-                                                                                  .green,
-                                                                              textColor: Colors
-                                                                                  .white,
+                                                                              backgroundColor: Colors.green,
+                                                                              textColor: Colors.white,
                                                                               fontSize: 16.0);
                                                                         }
                                                                       },
                                                                       child:
                                                                       Row(
-                                                                        children: <
-                                                                            Widget>[
-                                                                          SvgPicture
-                                                                              .asset(
-                                                                            'assets/images/Pin-s.svg',
+                                                                        children: <Widget>[SvgPicture.asset('assets/images/Pin-s.svg',
                                                                             width: 11,
-                                                                            color: Colors
-                                                                                .white,
+                                                                            color: Colors.white,
                                                                           ),
                                                                           SizedBox(
                                                                             width: 5,
                                                                           ),
-                                                                          Text(
-                                                                            "Pinned",
+                                                                          Text("Pinned",
                                                                             style: TextStyle(
                                                                                 fontSize: 13,
-                                                                                color: Colors
-                                                                                    .white,
-                                                                                fontWeight: FontWeight
-                                                                                    .normal),
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.normal),
                                                                           ),
                                                                           // text
                                                                         ],
@@ -1188,7 +989,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                             ),
                                           )),
                                     ),
-                                  )))
+                                  )
+                          )
+                      )
                     ],
                   )
                       : Visibility(
@@ -1207,7 +1010,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                       borderRadius:
                                       BorderRadius.all(Radius.circular(10))),
                                   child: Text(
-                                    "${kename}  List Not Found",
+                                    "$kename  List Not Found",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 17.sp, fontFamily: 'Poppins'),
@@ -1593,12 +1396,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               var radius3 = _radius * kmMiles_d;
                               var radious4 = radius3.toString();
 
-                              print("Your kilometer ${_radius}");
+                              print("Your kilometer $_radius");
 
                               SharedPreferences pre = await SharedPreferences.getInstance();
                               pre.setDouble("radiusData", _radius);
 
-                              print("dataradius${radius3}");
+                              print("dataradius$radius3");
 
                               if (0 <= radius3 && radius3 <= 5) {
                                 _determinePosition(kenameType, "500");
@@ -1655,6 +1458,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   void getNearbyPlaces(double latitude, double longitude, String radius) async {
     // var url = Uri.parse('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude.toString() + ',' + longitude.toString() + '&radius=' + radius + '&key=' + apikey);
+
+     ViewDialog(context: context).showLoadingIndicator("View Details Wait...", "", context);
 
     var url = Uri.parse(
         'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=$radius&key=$googleApikey');
@@ -1910,8 +1715,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
     }
 
     if (kDebugMode) {
-      print("latitudedetails ${latitude1}");
-      print("latitudedetails ${longitude1}");
+      print("latitudedetails $latitude1");
+      print("latitudedetails $longitude1");
     }
 
     if (kDebugMode) {
@@ -1981,12 +1786,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
   //   setState(() {});
   // }
 
-  Image getImage(String photo_reference,String maxwidth){
+  Image getImage(String photoReference,String maxwidth){
 
     var baseurl = "https://maps.googleapis.com/maps/api/place/photo";
     // var maxwidth = "100";
     // var maxHeight = "100";
-    final url = "$baseurl?maxwidth=$maxwidth&photo_reference=$photo_reference&key=$googleApikey";
+    final url = "$baseurl?maxwidth=$maxwidth&photo_reference=$photoReference&key=$googleApikey";
     return Image.network(url,  filterQuality: FilterQuality.high,
       fit: BoxFit.cover,);
   }
@@ -2007,9 +1812,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   Future<void> setRadiousData(String Radius) async {
 
-    String str_userId = userId.toString();
+    String strUserid = userId.toString();
 
-    http.Response response = await AddKMRadius().addkmRadius(str_userId, Radius);
+    http.Response response = await AddKMRadius().addkmRadius(strUserid, Radius);
     var jsonResponse = jsonDecode(response.body);
     var userResponse = SuccessResponseKM.fromJson(jsonResponse);
 

@@ -99,6 +99,7 @@ class Assets {
   static const String imagesPlusIcon = 'assets/images/plus-icon.svg';
   static const String imagesProfileimage = 'assets/images/profileimage.jpg';
   static const String imagesRadius = 'assets/images/radius.png';
+  static const String imagesResortRestarunts = 'assets/images/resort_restarunts.jpg';
   static const String imagesReviewDetailsImg = 'assets/images/review-details-img.png';
   static const String imagesReviewImg = 'assets/images/review-img.png';
   static const String imagesShareG = 'assets/images/share-g.png';
@@ -123,6 +124,7 @@ class Assets {
   static const String imagesUserW = 'assets/images/user-w.png';
   static const String imagesVideoG = 'assets/images/video-g.png';
   static const String imagesVideoIcon = 'assets/images/video-icon.svg';
+  static const String imagesVideoReview = 'assets/images/videoReview.jpg';
   static const String imagesVideoS = 'assets/images/video-s.png';
   static const String imagesVideoW = 'assets/images/video-w.png';
   static const String imagesWhatsappShare = 'assets/images/whatsapp_share.png';

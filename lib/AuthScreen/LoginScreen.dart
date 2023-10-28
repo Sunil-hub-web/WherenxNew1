@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../Dimension.dart';
 import '../Routes/RouteHelper.dart';
@@ -167,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 RouteHelper.getotpScreenpage());
                                           },
                                           style: ElevatedButton.styleFrom(
-                                            primary: Colors.cyan,
+                                            backgroundColor: Colors.cyan,
                                             // set the background color
                                             minimumSize: Size(
                                                 MediaQuery.of(context)
@@ -282,7 +280,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 RouteHelper.getotpScreenpage());
                                           },
                                           style: ElevatedButton.styleFrom(
-                                            primary: Colors.cyan,
+                                            backgroundColor: Colors.cyan,
                                             minimumSize: Size(
                                                 MediaQuery.of(context)
                                                     .size

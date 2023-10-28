@@ -6,7 +6,7 @@ import 'package:wherenxnew1/ApiImplement/ApiUrl.dart';
 
 class ViewVideoReview{
 
-  Future<http.Response?> viewVideoReview(String user_id, String place_id) async {
+  Future<http.Response?> viewVideoReview(String userId, String placeId) async {
 
     http.Response? response;
 
@@ -19,8 +19,8 @@ class ViewVideoReview{
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode(<String,String>{
-            'user_id': user_id,
-            'place_id': place_id
+            'user_id': userId,
+            'place_id': placeId
           })
       );
 

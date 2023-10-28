@@ -6,12 +6,12 @@ import 'package:wherenxnew1/ApiImplement/ApiUrl.dart';
 
 class ViewReviewList{
 
-  Future<http.Response> getReviewList(String user_id, String place_id) async {
+  Future<http.Response> getReviewList(String userId, String placeId) async {
 
     http.Response response;
     response = await http.post(Uri.parse(ApiUrl.view_user_reviews),
     headers: <String,String>{'Content-Type': 'application/json; charset=UTF-8',},
-    body: jsonEncode(<String,String>{'user_id' : user_id, 'place_id' : place_id}));
+    body: jsonEncode(<String,String>{'user_id' : userId, 'place_id' : placeId}));
 
     return response;
 

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'Authentication.dart';
@@ -76,6 +75,6 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
           ),
         ),
       ),
-    );;
+    );
   }
 }

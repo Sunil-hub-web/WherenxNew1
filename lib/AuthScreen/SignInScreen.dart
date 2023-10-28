@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:wherenxnew1/ApiImplement/ApiUrl.dart';
 
 import '../ApiCallingPage/SigninPage.dart';
 import '../modelclass/logindata.dart';

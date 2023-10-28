@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wherenxnew1/Dimension.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
@@ -507,8 +506,7 @@ class _ExploreOnScreenState extends State<ExploreOnScreen> {
                                             ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                elevation: 0,
-                                                primary: Colors.white,
+                                                elevation: 0, backgroundColor: Colors.white,
                                                 // minimumSize: Size( 40),
                                                 shape: RoundedRectangleBorder(
                                                   side: const BorderSide(
@@ -541,8 +539,7 @@ class _ExploreOnScreenState extends State<ExploreOnScreen> {
                                             ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                elevation: 0,
-                                                primary: Colors.cyan,
+                                                elevation: 0, backgroundColor: Colors.cyan,
                                                 // minimumSize: Size( 40),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
@@ -679,8 +676,7 @@ class _ExploreOnScreenState extends State<ExploreOnScreen> {
                                             ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                elevation: 0,
-                                                primary: Colors.white,
+                                                elevation: 0, backgroundColor: Colors.white,
                                                 // minimumSize: Size( 40),
                                                 shape: RoundedRectangleBorder(
                                                   side: const BorderSide(
@@ -713,8 +709,7 @@ class _ExploreOnScreenState extends State<ExploreOnScreen> {
                                             ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                elevation: 0,
-                                                primary: Colors.cyan,
+                                                elevation: 0, backgroundColor: Colors.cyan,
                                                 // minimumSize: Size( 40),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
@@ -851,8 +846,7 @@ class _ExploreOnScreenState extends State<ExploreOnScreen> {
                                             ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                elevation: 0,
-                                                primary: Colors.white,
+                                                elevation: 0, backgroundColor: Colors.white,
                                                 // minimumSize: Size( 40),
                                                 shape: RoundedRectangleBorder(
                                                   side: const BorderSide(
@@ -885,8 +879,7 @@ class _ExploreOnScreenState extends State<ExploreOnScreen> {
                                             ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                elevation: 0,
-                                                primary: Colors.cyan,
+                                                elevation: 0, backgroundColor: Colors.cyan,
                                                 // minimumSize: Size( 40),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
@@ -1023,8 +1016,7 @@ class _ExploreOnScreenState extends State<ExploreOnScreen> {
                                             ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                elevation: 0,
-                                                primary: Colors.white,
+                                                elevation: 0, backgroundColor: Colors.white,
                                                 // minimumSize: Size( 40),
                                                 shape: RoundedRectangleBorder(
                                                   side: const BorderSide(
@@ -1057,8 +1049,7 @@ class _ExploreOnScreenState extends State<ExploreOnScreen> {
                                             ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                elevation: 0,
-                                                primary: Colors.cyan,
+                                                elevation: 0, backgroundColor: Colors.cyan,
                                                 // minimumSize: Size( 40),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
@@ -1195,8 +1186,7 @@ class _ExploreOnScreenState extends State<ExploreOnScreen> {
                                             ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                elevation: 0,
-                                                primary: Colors.white,
+                                                elevation: 0, backgroundColor: Colors.white,
                                                 // minimumSize: Size( 40),
                                                 shape: RoundedRectangleBorder(
                                                   side: const BorderSide(
@@ -1229,8 +1219,7 @@ class _ExploreOnScreenState extends State<ExploreOnScreen> {
                                             ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                elevation: 0,
-                                                primary: Colors.cyan,
+                                                elevation: 0, backgroundColor: Colors.cyan,
                                                 // minimumSize: Size( 40),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:

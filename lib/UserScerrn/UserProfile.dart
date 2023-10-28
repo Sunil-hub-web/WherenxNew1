@@ -1,21 +1,17 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:progress_dialog_null_safe/progress_dialog_null_safe.dart';
 import 'package:wherenxnew1/ApiCallingPage/AddKMRadius.dart';
-import 'package:wherenxnew1/ApiCallingPage/UpdateProfileImage.dart';
 import 'package:wherenxnew1/ApiCallingPage/ViewDelight_List.dart';
 import 'package:wherenxnew1/ApiCallingPage/ViewUserDeatils.dart';
 import 'package:wherenxnew1/ApiCallingPage/ViewUserProfileImage.dart';
-import 'package:wherenxnew1/ApiImplement/ViewDialog.dart';
 import 'package:wherenxnew1/Dimension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wherenxnew1/modelclass/ProfileImageResponse.dart';
-import 'package:wherenxnew1/modelclass/ProfileImageSuccess.dart';
 import 'package:wherenxnew1/modelclass/SuccessResponseKM.dart';
 import 'package:wherenxnew1/modelclass/ViewUserResponse.dart';
 
@@ -55,10 +51,10 @@ class _UserProfileState extends State<UserProfile> {
     islogin = pre.getBool("islogin") ?? false;
     userId = pre.getInt("userId") ?? 0;
 
-    String str_userId = userId.toString();
+    String strUserid = userId.toString();
 
     http.Response response =
-        await ViewDelight_List().getDelightList(str_userId);
+        await ViewDelight_List().getDelightList(strUserid);
     var jsonResponse = json.decode(response.body);
     var delightlistResponse = ViewDelightList.fromJson(jsonResponse);
 
@@ -102,12 +98,12 @@ class _UserProfileState extends State<UserProfile> {
     islogin = pre.getBool("islogin") ?? false;
     userId = pre.getInt("userId") ?? 0;
 
-    String str_usreId = userId.toString();
+    String strUsreid = userId.toString();
 
     print(userId);
 
     http.Response? response =
-        await ViewUserDetails().getUserDetails(str_usreId);
+        await ViewUserDetails().getUserDetails(strUsreid);
     var jsonResponse = jsonDecode(response!.body);
     var userResponse = ViewUserResponse.fromJson(jsonResponse);
 
@@ -119,27 +115,27 @@ class _UserProfileState extends State<UserProfile> {
       city = userResponse.userInfo!.city!;
       radius = userResponse.userInfo!.radius!;
 
-      String srt_radius = radius.toString();
+      String srtRadius = radius.toString();
 
-      if (srt_radius == "500") {
+      if (srtRadius == "500") {
         dropValue = "0-5";
-      } else if (srt_radius == "1000") {
+      } else if (srtRadius == "1000") {
         dropValue = "5-10";
-      } else if (srt_radius == "1500") {
+      } else if (srtRadius == "1500") {
         dropValue = "10-15";
-      } else if (srt_radius == "2000") {
+      } else if (srtRadius == "2000") {
         dropValue = "15-20";
-      } else if (srt_radius == "2500") {
+      } else if (srtRadius == "2500") {
         dropValue = "20-25";
-      } else if (srt_radius == "3000") {
+      } else if (srtRadius == "3000") {
         dropValue = "25-30";
-      } else if (srt_radius == "3500") {
+      } else if (srtRadius == "3500") {
         dropValue = "30-35";
-      } else if (srt_radius == "4000") {
+      } else if (srtRadius == "4000") {
         dropValue = "35-40";
-      } else if (srt_radius == "4500") {
+      } else if (srtRadius == "4500") {
         dropValue = "40-45";
-      } else if (srt_radius == "5000") {
+      } else if (srtRadius == "5000") {
         dropValue = "45-50";
       }
 
@@ -174,12 +170,12 @@ class _UserProfileState extends State<UserProfile> {
     islogin = pre.getBool("islogin") ?? false;
     userId = pre.getInt("userId") ?? 0;
 
-    String str_userId = userId.toString();
+    String strUserid = userId.toString();
 
     print(userId);
 
     http.Response? response =
-        await ViewUserProfileImage().getProfileImage(str_userId);
+        await ViewUserProfileImage().getProfileImage(strUserid);
     var jsonResponse = jsonDecode(response.body);
     var userResponse1 = ProfileImageResponse.fromJson(jsonResponse);
 
@@ -1123,14 +1119,14 @@ class _UserProfileState extends State<UserProfile> {
                                                                 as String?)!;
 
                                                                 String
-                                                                str_userId =
+                                                                strUserid =
                                                                 userId
                                                                     .toString();
 
                                                                 http.Response
                                                                 response =
                                                                 await AddKMRadius().addkmRadius(
-                                                                    str_userId,
+                                                                    strUserid,
                                                                     dropdownCountry!);
                                                                 var jsonResponse =
                                                                 jsonDecode(

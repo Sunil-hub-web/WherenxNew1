@@ -89,7 +89,7 @@ class _CameraPageState extends State<CameraPage> {
       filePath = file.path;
       print("filepathedetails${file.path}");
       double filesize = getFileSize(File(file.path));
-      print("metathesizedfile  ${filesize}");
+      print("metathesizedfile  $filesize");
       setState(() => _isRecording = false);
       final route = MaterialPageRoute(
         fullscreenDialog: true,

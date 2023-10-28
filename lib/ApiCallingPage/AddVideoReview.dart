@@ -4,8 +4,8 @@ import 'package:wherenxnew1/ApiImplement/ApiUrl.dart';
 
 class AddVideoView{
 
-  Future<http.StreamedResponse?> addVideoReviewDetails(String user_id,String review_date, String reviewer_name,
-      String restaurant_name, String place_id, String rating, video) async {
+  Future<http.StreamedResponse?> addVideoReviewDetails(String userId,String reviewDate, String reviewerName,
+      String restaurantName, String placeId, String rating, video) async {
 
     http.StreamedResponse? response;
 
@@ -25,11 +25,11 @@ class AddVideoView{
     try{
 
       var request = http.MultipartRequest('POST', Uri.parse(ApiUrl.upload_video_review));
-      request.fields.addAll({'user_id' : user_id,
-            'review_date' : review_date,
-            'reviewer_name' : reviewer_name,
-            'restaurant_name' : restaurant_name,
-            'place_id' : place_id,
+      request.fields.addAll({'user_id' : userId,
+            'review_date' : reviewDate,
+            'reviewer_name' : reviewerName,
+            'restaurant_name' : restaurantName,
+            'place_id' : placeId,
             'rating' : rating,});
       request.files.add(await http.MultipartFile.fromPath('video', video));
      // request.files.add(await http.MultipartFile.fromPath('video', video));

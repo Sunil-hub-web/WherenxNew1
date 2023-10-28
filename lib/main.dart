@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:wherenxnew1/AuthScreen/SignInScreen.dart';
-import 'package:wherenxnew1/GoogleSigninPack/GoogleSignInScreen.dart';
-import 'package:wherenxnew1/UserScerrn/MyPinsScreen.dart';
 
 import 'Routes/RouteHelper.dart';
 
@@ -27,8 +24,7 @@ void main() {
 //       title: 'WhereNx',
 //       // initialRoute: RouteHelper.getSplashScreenPage(),
 //       // getPages: RouteHelper.routes,
-//       home: MyPinsScreen(),
-//     );
+//       home: MyPinsScreen(),dart fix --apply
 //   }
 // }
 

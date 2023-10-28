@@ -1,23 +1,18 @@
 import 'dart:convert';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wherenxnew1/ApiCallingPage/GetState.dart';
-import 'package:wherenxnew1/ApiCallingPage/ViewUserDeatils.dart';
 import 'package:wherenxnew1/ApiImplement/ViewDialog.dart';
-import 'package:wherenxnew1/AuthScreen/SignInScreen.dart';
 import 'package:wherenxnew1/modelclass/StateResponse.dart';
 import 'package:wherenxnew1/modelclass/UserRegister.dart';
-import 'package:wherenxnew1/modelclass/ViewUserResponse.dart';
+import '../ApiCallingPage/RegisterResponse.dart';
 import '../GoogleSigninPack/Authentication_GoogleSignIn.dart';
 import '../modelclass/CityResponse.dart';
 import '../ApiCallingPage/GetCountries.dart';
-import '../ApiCallingPage/RegisterResponse.dart';
 import '../modelclass/CountriesResponse.dart';
 import '../Dimension.dart';
 import '../Routes/RouteHelper.dart';
@@ -727,8 +722,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               Register(fullNameController.text.toString(),
                                                   mobileoremailController.text.toString(),"","","");
 
-                                              print("${fullNameController.text} ${mobileoremailController.text} ${dropdownCountry!} "
-                                                  "${dropdownState!} ${dropdownCity!}");
+                                              print("${fullNameController.text} ${mobileoremailController.text}");
 
                                               // final employee = WherenxModel(
                                               //     id,fullNameController.text.toString(),mobileoremailController.text.toString(),
@@ -1038,13 +1032,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> Register(String fullName, String EmailId, String dropdownCountry, String dropdownState, String dropdownCity) async {
 
-    http.Response? response = await userRegister(fullName,
+    http.Response? response = await userRegister_det(fullName,
         EmailId,dropdownCountry,dropdownState,dropdownCity);
     var jsonResponse = json.decode(response!.body);
-    var user_Register = UserRegister.fromJson(jsonResponse);
+    var userRegister = UserRegister.fromJson(jsonResponse);
     print(response.body);
 
-    if(user_Register.status == "failed"){
+    if(userRegister.status == "failed"){
 
       ViewDialog(context: context).hideOpenDialog();
 
@@ -1065,7 +1059,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       Fluttertoast.showToast(
 
-          msg: user_Register.message!,
+          msg: userRegister.message!,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -1080,26 +1074,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
         await SharedPreferences.getInstance();
         pre.setString(
             "name",
-            user_Register
+            userRegister
                 .data!.name!); //save integer
         pre.setString(
             "email",
-            user_Register
+            userRegister
                 .data!.email!); //save integer
         pre.setString(
             "country",
-            user_Register
+            userRegister
                 .data!.country!); //save String
         pre.setString(
             "state",
-            user_Register
+            userRegister
                 .data!.state!); //save String
         pre.setString(
             "city",
-            user_Register
+            userRegister
                 .data!.city!); //save String
-        pre.setInt("userId", user_Register.data!.id!); //save String
-        pre.setInt("radius", user_Register.data!.radius!); //save String
+        pre.setInt("userId", userRegister.data!.id!); //save String
+        pre.setInt("radius", userRegister.data!.radius!); //save String
         pre.setBool("success", true); //save Boolean
         pre.setBool("islogin", true);
 

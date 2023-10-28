@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:another_flushbar/flushbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,8 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:progress_dialog_null_safe/progress_dialog_null_safe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wherenxnew1/ApiCallingPage/AddReview.dart';
-import 'package:wherenxnew1/ApiCallingPage/AddVideoReview.dart';
-import 'package:wherenxnew1/ApiImplement/ViewDialog.dart';
 import 'package:wherenxnew1/modelclass/ReviewSuccessStatues.dart';
 import 'package:wherenxnew1/videorecording/CameraPage.dart';
 import '../Dimension.dart';
@@ -335,7 +332,7 @@ class _ReviewAddScreenState extends State<ReviewAddScreen> {
                               ReviewSuccessStatues.fromJson(jsonResponse);
 
                           String allvaluedet =
-                              "${struserId}, ${formattedDate}, ${F_name},${placename}, ${placeId}, ${strrating}${userInput.text.toString()}";
+                              "$struserId, $formattedDate, $F_name,$placename, $placeId, $strrating${userInput.text.toString()}";
 
                           print(allvaluedet);
 
@@ -391,12 +388,12 @@ class _ReviewAddScreenState extends State<ReviewAddScreen> {
     );
   }
 
-  Image getImage(String photo_reference,String maxWidth) {
+  Image getImage(String photoReference,String maxWidth) {
     var baseurl = "https://maps.googleapis.com/maps/api/place/photo";
     //var maxWidth = "100";
    // var maxHeight = "100";
     final url =
-        "$baseurl?maxwidth=$maxWidth&photo_reference=$photo_reference&key=$googleApikey";
+        "$baseurl?maxwidth=$maxWidth&photo_reference=$photoReference&key=$googleApikey";
     return Image.network(
          url,
          fit: BoxFit.cover,

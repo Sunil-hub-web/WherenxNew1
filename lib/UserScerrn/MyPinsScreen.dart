@@ -907,13 +907,11 @@ class _MyPinsScreenState extends State<MyPinsScreen> {
                                     itemBuilder: (context, int index) {
                                       return GestureDetector(
                                         onTap: () async {
-                                          SharedPreferences pre =
-                                              await SharedPreferences
-                                                  .getInstance();
-                                          pre.setString("placeId",
-                                              recentPinDet[index].placeId!);
-                                          Get.toNamed(
-                                              RouteHelper.getdetailsScreen());
+
+                                          SharedPreferences pre = await SharedPreferences.getInstance();
+                                          pre.setString("placeId", userinfoPin[index].placeId!);
+                                          Get.toNamed(RouteHelper.getdetailsScreen());
+
                                         },
                                         child: Container(
                                           padding: const EdgeInsets.only(
@@ -936,8 +934,7 @@ class _MyPinsScreenState extends State<MyPinsScreen> {
                                                       Dimensions.size18),
                                             ),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 Expanded(
                                                   flex: 1, // 20%
@@ -1000,16 +997,12 @@ class _MyPinsScreenState extends State<MyPinsScreen> {
                                                                   width: 40.w,
                                                                   child: Text(
                                                                     "${userinfoPin[index].name}",
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
+                                                                    overflow: TextOverflow.ellipsis,
                                                                     maxLines: 5,
                                                                     style: TextStyle(
                                                                         fontSize: 15.sp,
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontWeight:
-                                                                            FontWeight.normal),
+                                                                        color: Colors.black,
+                                                                        fontWeight: FontWeight.normal),
                                                                   ),
                                                                 ),
                                                                 Container(
@@ -1031,7 +1024,7 @@ class _MyPinsScreenState extends State<MyPinsScreen> {
                                                                             .asset(
                                                                           'assets/images/star.svg',
                                                                           width:
-                                                                              3.5.w,
+                                                                              3.w,
                                                                           color:
                                                                               const Color(0xFFF9BF3A),
                                                                         ),
@@ -1531,7 +1524,7 @@ class _MyPinsScreenState extends State<MyPinsScreen> {
 
   Image getImage(String photo_reference) {
     var baseurl = "https://maps.googleapis.com/maps/api/place/photo";
-    var maxWidth = "110";
+    var maxWidth = "1000";
    // var maxHeight = "110";
     final url =
         "$baseurl?maxwidth=$maxWidth&photo_reference=$photo_reference&key=$googleApikey";
@@ -1544,10 +1537,10 @@ class _MyPinsScreenState extends State<MyPinsScreen> {
 
   String getImage1(String photo_reference) {
     var baseurl = "https://maps.googleapis.com/maps/api/place/photo";
-    var maxWidth = "110";
-    var maxHeight = "110";
+    var maxWidth = "1000";
+    //var maxHeight = "110";
     final url =
-        "$baseurl?maxwidth=$maxWidth&maxheight=$maxHeight&photo_reference=$photo_reference&key=$googleApikey";
+        "$baseurl?maxwidth=$maxWidth&photo_reference=$photo_reference&key=$googleApikey";
     return url;
   }
 
@@ -1620,8 +1613,7 @@ class _MyPinsScreenState extends State<MyPinsScreen> {
     );
   }
 
-  Future<void> onButtonTap(
-      Share share, String str_data, String str_photourl) async {
+  Future<void> onButtonTap(Share share, String str_data, String str_photourl) async {
     String msg = str_data;
     String url = getImage1(str_photourl);
 

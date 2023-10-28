@@ -5,12 +5,11 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 import 'package:http/http.dart' as http;
+import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:wherenxnew1/ApiCallingPage/AddVideoReview.dart';
 import 'package:wherenxnew1/ApiImplement/ViewDialog.dart';
 import 'package:wherenxnew1/Routes/RouteHelper.dart';
@@ -29,7 +28,7 @@ class VideoPage extends StatefulWidget {
 
 class _VideoPageState extends State<VideoPage> {
   late VideoPlayerController _videoPlayerController;
-  String text = "", placeId = "", placename = "", F_name = "", formattedDate= "", placeType = "",profileImage = "";
+  String text = "", placeId = "", placename = "", F_name = "", formattedDate= "", placeType = "",profileImage = "",filePath1 = "";
   int userId = 0;
   double? _rating = 0.0;
   String googleApikey = "AIzaSyAuFYxq-RX0I1boI5HU5-olArirEi2Ez8k";
@@ -56,11 +55,7 @@ class _VideoPageState extends State<VideoPage> {
 
   }
 
-  @override
-  void dispose() {
-    _videoPlayerController.dispose();
-    super.dispose();
-  }
+
 
   Future _initVideoPlayer() async {
 
@@ -79,6 +74,24 @@ class _VideoPageState extends State<VideoPage> {
 
   }
 
+  Future genThumbnailFile() async{
+    final thumbnail = await VideoThumbnail.thumbnailFile(
+        video: widget.filePath,
+        // thumbnailPath: _tempDir,
+        imageFormat: ImageFormat.JPEG,
+        //maxHeightOrWidth: 0,
+        maxHeight:3,
+        maxWidth: 2,
+        quality: 10);
+
+    setState(() {
+      final file = File(thumbnail!);
+      filePath1 = file.path;
+    });
+
+    print("filepathimage${filePath1}");
+  }
+
   String? _result;
   bool _isRecursive = false;
 
@@ -88,7 +101,7 @@ class _VideoPageState extends State<VideoPage> {
     return fileBytes.lengthInBytes;
   }
 
-    Future<void> _displayFileSize(String path) async {
+  Future<void> _displayFileSize(String path) async {
     final fileSizeInBytes = await _getFileSize(path);
     _displaySize(fileSizeInBytes);
   }
@@ -110,6 +123,20 @@ class _VideoPageState extends State<VideoPage> {
     setState(() {
       _result = fileSize;
     });
+  }
+
+  @override
+  void initState() {
+
+   genThumbnailFile();
+    super.initState();
+
+  }
+
+  @override
+  void dispose() {
+    _videoPlayerController.dispose();
+    super.dispose();
   }
 
   @override
@@ -159,9 +186,9 @@ class _VideoPageState extends State<VideoPage> {
                 String strrating = _rating.toString();
 
                 String allvaluedet = "Your path details $struserId, $formattedDate, $F_name,$placename, $placeId, $strrating, "
-                    "${filePath}";
+                    "$filePath";
                 print(allvaluedet);
-                print("your video file path ${filePath}");
+                print("your video file path $filePath");
 
                 ViewDialog(context: context).showLoadingIndicator("Upload Video Wait...", "Video Preview", context);
 

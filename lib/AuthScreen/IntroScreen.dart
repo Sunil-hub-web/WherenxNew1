@@ -1,10 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Dimension.dart';
 import '../GoogleSigninPack/Authentication.dart';
@@ -321,7 +317,7 @@ class IntroScreen extends StatelessWidget {
                       // Get.toNamed(RouteHelper.getexploreScreenpage());
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.cyan,
+                      backgroundColor: Colors.cyan,
                       minimumSize: Size(Dimensions.screenWidth / 2.5, 50),
                       shape: RoundedRectangleBorder(
                         side: const BorderSide(
