@@ -127,8 +127,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
     }
 
     item1.add(strrating);
-    item1.add("5.5 km");
-    item1.add("526 pins");
+    item1.add("0 km");
+    item1.add("0 pins");
 
     item2.add(reviewlist1);
     item2.add("Directions");
@@ -572,25 +572,21 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   children: [
                                     Text(
                                       singlePageDetails.result?.types?[0] ?? "",
-                                      style: TextStyle(
-                                          color: Colors.black54, fontSize: 14),
+                                      style: const TextStyle(color: Colors.black54, fontSize: 14),
                                     ),
                                     Text(
-                                      singlePageDetails.result
-                                          ?.businessStatus == "OPERATIONAL"
-                                          ? " open:  "
-                                          : "close",
-                                      style: TextStyle(
-                                          color: Colors.green, fontSize: 14),
+                                      singlePageDetails.result?.businessStatus == "OPERATIONAL" ? " open:  " : " close",
+                                      style: TextStyle(color: Colors.green,
+                                          fontSize: 14
+                                      ),
                                     ),
                                     Text(
-                                      openHours == "" ? "" : "Close  " +
-                                          time24to12Format(
-                                              singlePageDetails.result
-                                                  ?.currentOpeningHours!
-                                                  .periods?[0].close!.time),
+                                      openHours == "" ? "" : " Close  "
+                                          "${time24to12Format(singlePageDetails.result ?.currentOpeningHours!.periods?[0].close!.time)}",
                                       style: TextStyle(
-                                          color: Colors.black54, fontSize: 14),
+                                          color: Colors.black54,
+                                          fontSize: 14
+                                      ),
                                     ),
                                   ],
                                 )
