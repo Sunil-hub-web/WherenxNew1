@@ -107,6 +107,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   int userId = 0;
   NearByplaces nearByplaces = NearByplaces();
   List<Results> nearbyLocations = [];
+  List<Results> nearbyLocations1 = [];
   double totalDistance = 0;
   List<String> kilometers = [];
   String? _currentAddress;
@@ -195,7 +196,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   String kename = "", delightId = "", kenameType = "";
   int delight_Id = 0;
 
-  bool isVisible = false;
+  bool isVisible = false, isTextVisible = false;
 
   double startlatitude1 = 0.0, startlongitude1 = 0.0, dob_radiusData = 0.0;
 
@@ -307,7 +308,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
         getNearbyPlaces2(
             startlatitude1, startlongitude1, "1000", "restaurant|food");
       } else if (elightlistName1[i].delightName == "Bar") {
-        getNearbyPlaces2(startlatitude1, startlongitude1, "1000", "bar");
+        getNearbyPlaces2(
+            startlatitude1, startlongitude1, "1000", "bar|night_club");
       } else if (elightlistName1[i].delightName == "Shopping") {
         getNearbyPlaces2(
             startlatitude1, startlongitude1, "1000", "shopping_mall");
@@ -452,12 +454,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
           ResponsiveSizer(builder: (context, orientation, screenType) {
             return Container(
-              margin: EdgeInsets.only(top: 0.4.dp, left: 0.1.dp, right: 0.1.dp, bottom: 0.3.dp),
+              margin: EdgeInsets.only(
+                  top: 0.4.dp, left: 0.1.dp, right: 0.1.dp, bottom: 0.3.dp),
               width: 100.w,
               height: 15.h,
               child: Row(
-                 mainAxisAlignment: MainAxisAlignment.start,
-                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     flex: 3,
@@ -515,10 +518,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         // }
                       },
                       child: Container(
-                      // height: 6.5.h,
-                       // margin: EdgeInsets.only(bottom: 0.3.dp),
-                           margin: EdgeInsets.only(top: 0.1.dp,bottom: 0.2.dp),
-                           //padding: EdgeInsets.only(top: 0.1.dp, right: 0.1.dp, bottom: 0.1.dp, left: 0.1.dp,),
+                        // height: 6.5.h,
+                        // margin: EdgeInsets.only(bottom: 0.3.dp),
+                        margin: EdgeInsets.only(top: 0.1.dp, bottom: 0.2.dp),
+                        //padding: EdgeInsets.only(top: 0.1.dp, right: 0.1.dp, bottom: 0.1.dp, left: 0.1.dp,),
                         // decoration: BoxDecoration(
                         //     borderRadius: BorderRadius.circular(12),
                         //     color: Colors.white),
@@ -541,15 +544,17 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               contentPadding:
                                   EdgeInsets.fromLTRB(1.h, 3.5.h, 3.h, 0),
                               labelText: 'Search Delights',
-                              prefixIcon: Icon(Icons.search,size: 25),
+                              prefixIcon: Icon(Icons.search, size: 25),
                               labelStyle: const TextStyle(
                                 color: Color(0xFFDDE4E4),
                               ),
                               floatingLabelStyle:
                                   const TextStyle(color: Color(0xFFA1A8A9)),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Color(0xFFDDE4E4), width: 1.0),
-                                borderRadius: BorderRadius.all(Radius.circular(30.sp),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFFDDE4E4), width: 1.0),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.sp),
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -626,7 +631,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       },
                       child: Container(
                         child: Container(
-                          margin: EdgeInsets.only(top: 0.2.dp,bottom: 0.2.dp),
+                          margin: EdgeInsets.only(top: 0.2.dp, bottom: 0.2.dp),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: Colors.white),
@@ -692,13 +697,20 @@ class _ExploreScreenState extends State<ExploreScreen> {
             // )
           ),
           Container(
-              margin: EdgeInsets.only(
-                  left: Dimensions.size7,
-                  top: Dimensions.size135,
-                  right: Dimensions.size10,
-                  bottom: 0),
-              child: nearbyLocations.isNotEmpty
-                  ? Column(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                    height: Dimensions.size170,
+                    width: Dimensions.size600,
+                    margin: EdgeInsets.only(
+                        left: Dimensions.size7,
+                        top: Dimensions.size135,
+                        right: Dimensions.size10,
+                        bottom: 0),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
                       mainAxisSize: MainAxisSize.max,
@@ -708,8 +720,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             width: Dimensions.size600,
                             margin: const EdgeInsets.all(5),
                             child: ListView.builder(
+                                shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
-                                itemCount: nearbyLocations.length,
+                                itemCount: nearbyLocations1.length,
                                 itemBuilder:
                                     (context, int index) => GestureDetector(
                                           onTap: () async {
@@ -718,7 +731,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                     .getInstance();
                                             pre.setString(
                                                 "placeId",
-                                                nearbyLocations[index]
+                                                nearbyLocations1[index]
                                                     .placeId!);
                                             //save String
                                             Get.toNamed(
@@ -807,14 +820,14 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                       .fromRadius(
                                                                       48),
                                                                   // Image radius
-                                                                  child: nearbyLocations[index]
+                                                                  child: nearbyLocations1[index]
                                                                               .photos?[
                                                                                   0]
                                                                               .photoReference ==
                                                                           null
                                                                       ? Image
                                                                           .network(
-                                                                          nearbyLocations[index]
+                                                                          nearbyLocations1[index]
                                                                               .icon!,
                                                                           height:
                                                                               Dimensions.size100,
@@ -822,8 +835,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                               Dimensions.size100,
                                                                         )
                                                                       : getImage(
-                                                                          "${nearbyLocations[index].photos?[0].photoReference}",
-                                                                          "${nearbyLocations[index].photos?[0].width}") /*Image.network(nearbyLocations[index].icon!,)*/,
+                                                                          "${nearbyLocations1[index].photos?[0].photoReference}",
+                                                                          "${nearbyLocations1[index].photos?[0].width}") /*Image.network(nearbyLocations[index].icon!,)*/,
                                                                 ),
                                                               ),
                                                             )),
@@ -861,7 +874,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                         Expanded(
                                                                           child:
                                                                               Text(
-                                                                            nearbyLocations[index].name!,
+                                                                            nearbyLocations1[index].name!,
                                                                             style: const TextStyle(
                                                                                 fontSize: 14,
                                                                                 color: Colors.black,
@@ -890,9 +903,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                                 const SizedBox(
                                                                                   width: 2,
                                                                                 ),
-                                                                                nearbyLocations[index].rating != null
+                                                                                nearbyLocations1[index].rating != null
                                                                                     ? Text(
-                                                                                        nearbyLocations[index].rating.toString(),
+                                                                                        nearbyLocations1[index].rating.toString(),
                                                                                         style: const TextStyle(fontSize: 11, color: Color(0xFF616768), fontWeight: FontWeight.normal),
                                                                                       )
                                                                                     : const Text(
@@ -912,7 +925,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                     Row(
                                                                       children: [
                                                                         Text(
-                                                                          nearbyLocations[index]
+                                                                          nearbyLocations1[index]
                                                                               .types![0],
                                                                           overflow:
                                                                               TextOverflow.ellipsis,
@@ -938,7 +951,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                     Row(
                                                                       children: [
                                                                         Text(
-                                                                          nearbyLocations[index].businessStatus == "OPERATIONAL"
+                                                                          nearbyLocations1[index].businessStatus == "OPERATIONAL"
                                                                               ? "open"
                                                                               : "close",
                                                                           overflow:
@@ -1029,9 +1042,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                                               final islogin = pre.getBool("islogin") ?? false;
                                                                               final userId = pre.getInt("userId") ?? 0;
                                                                               final struserId = userId.toString();
-                                                                              final strlat = nearbyLocations[index].geometry?.location?.lat.toString();
-                                                                              final strlng = nearbyLocations[index].geometry?.location?.lng.toString();
-                                                                              final placeid = nearbyLocations[index].placeId!;
+                                                                              final strlat = nearbyLocations1[index].geometry?.location?.lat.toString();
+                                                                              final strlng = nearbyLocations1[index].geometry?.location?.lng.toString();
+                                                                              final placeid = nearbyLocations1[index].placeId!;
 
                                                                               http.Response response = await PinPlaces().insertPinPlaces(struserId, delightId, nearbyLocations[index].types![0], placeid, strlat!, strlng!, nearbyLocations[index].name!, "", nearbyLocations[index].vicinity!, "", "", "", "", "", "", "", "", nearbyLocations[index].photos![0].photoReference!, nearbyLocations[index].rating.toString(), "");
 
@@ -1083,30 +1096,449 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                           ),
                                         )))
                       ],
-                    )
-                  : Visibility(
-                      visible: isVisible,
-                      child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: ResponsiveSizer(
-                              builder: (context, orientation, screenType) {
-                            return Container(
-                              padding: const EdgeInsets.all(10),
-                              height: 7.h,
-                              width: 100.w,
-                              margin: EdgeInsets.all(0.5.dp),
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                              child: Text(
-                                "$kename  List Not Found",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 17.sp, fontFamily: 'Poppins'),
-                              ),
-                            );
-                          }))))
+                    )),
+                /* Visibility(
+                      visible: isTextVisible,
+                      child: Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          height: Dimensions.size35,
+                          width: Dimensions.screenWidth,
+                          margin: EdgeInsets.only(left: 30, right: 30, top: 20),
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Text(
+                            "You might be interested in",
+                            textAlign: TextAlign.center,
+                            style:
+                                TextStyle(fontSize: 15, fontFamily: 'Poppins'),
+                          ),
+                        ),
+                      ),
+                    ),*/
+                Container(
+                    height: Dimensions.size160,
+                    width: Dimensions.size600,
+                    margin: EdgeInsets.only(
+                        left: Dimensions.size7,
+                        right: Dimensions.size10,
+                        bottom: Dimensions.size40),
+                    child: nearbyLocations.isNotEmpty
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              Container(
+                                  height: Dimensions.size150,
+                                  width: Dimensions.size600,
+                                  margin: const EdgeInsets.all(5),
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: nearbyLocations.length,
+                                      itemBuilder:
+                                          (context, int index) =>
+                                              GestureDetector(
+                                                onTap: () async {
+                                                  SharedPreferences pre =
+                                                      await SharedPreferences
+                                                          .getInstance();
+                                                  pre.setString(
+                                                      "placeId",
+                                                      nearbyLocations[index]
+                                                          .placeId!);
+                                                  //save String
+                                                  Get.toNamed(RouteHelper
+                                                      .getdetailsScreen());
+                                                },
+                                                child: SingleChildScrollView(
+                                                  child: Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      margin:
+                                                          const EdgeInsets.all(
+                                                              5),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        gradient: const LinearGradient(
+                                                            begin: Alignment(
+                                                                6.123234262925839e-17,
+                                                                1),
+                                                            end: Alignment(-1,
+                                                                6.123234262925839e-17),
+                                                            colors: [
+                                                              Color.fromRGBO(
+                                                                  255,
+                                                                  255,
+                                                                  255,
+                                                                  255),
+                                                              Color.fromRGBO(
+                                                                  255,
+                                                                  255,
+                                                                  255,
+                                                                  255),
+                                                            ]),
+                                                      ),
+                                                      child: Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 10,
+                                                                right: 10),
+                                                        margin: const EdgeInsets
+                                                            .only(
+                                                          left: 0,
+                                                          right: 0,
+                                                          top: 0,
+                                                          bottom: 10,
+                                                        ),
+                                                        width: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .width,
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            2.5,
+                                                        child: Card(
+                                                          elevation: 5,
+                                                          shadowColor:
+                                                              Colors.black12,
+                                                          color: Colors.white,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
+                                                          ),
+                                                          child: Row(
+                                                            children: [
+                                                              Expanded(
+                                                                  flex:
+                                                                      2, // 20%
+                                                                  child:
+                                                                      Container(
+                                                                    height: 130,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(20)),
+                                                                    width: 100,
+                                                                    margin: const EdgeInsets
+                                                                        .only(
+                                                                        top: 10,
+                                                                        left:
+                                                                            10,
+                                                                        right:
+                                                                            10,
+                                                                        bottom:
+                                                                            10),
+                                                                    child:
+                                                                        ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              20),
+                                                                      // Image border
+                                                                      child: SizedBox
+                                                                          .fromSize(
+                                                                        size: const Size
+                                                                            .fromRadius(
+                                                                            48),
+                                                                        // Image radius
+                                                                        child: nearbyLocations[index].photos?[0].photoReference ==
+                                                                                null
+                                                                            ? Image
+                                                                                .network(
+                                                                                nearbyLocations[index].icon!,
+                                                                                height: Dimensions.size100,
+                                                                                width: Dimensions.size100,
+                                                                              )
+                                                                            : getImage("${nearbyLocations[index].photos?[0].photoReference}",
+                                                                                "${nearbyLocations[index].photos?[0].width}") /*Image.network(nearbyLocations[index].icon!,)*/,
+                                                                      ),
+                                                                    ),
+                                                                  )),
+                                                              Expanded(
+                                                                  flex:
+                                                                      3, // 60%
+                                                                  child:
+                                                                      SingleChildScrollView(
+                                                                    scrollDirection:
+                                                                        Axis.vertical,
+                                                                    child:
+                                                                        Container(
+                                                                      margin: const EdgeInsets
+                                                                          .only(
+                                                                          left:
+                                                                              2,
+                                                                          right:
+                                                                              2,
+                                                                          top:
+                                                                              10),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Expanded(
+                                                                                child: Text(
+                                                                                  nearbyLocations[index].name!,
+                                                                                  style: const TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.normal),
+                                                                                ),
+                                                                              ),
+                                                                              Container(
+                                                                                height: 30,
+                                                                                child: TextButton(
+                                                                                  style: ButtonStyle(
+                                                                                    backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                                                                  ),
+                                                                                  onPressed: () {},
+                                                                                  child: Row(
+                                                                                    children: <Widget>[
+                                                                                      SvgPicture.asset(
+                                                                                        'assets/images/star.svg',
+                                                                                        width: 18,
+                                                                                        color: const Color(0xFFF9BF3A),
+                                                                                      ),
+                                                                                      const SizedBox(
+                                                                                        width: 2,
+                                                                                      ),
+                                                                                      nearbyLocations[index].rating != null
+                                                                                          ? Text(
+                                                                                              nearbyLocations[index].rating.toString(),
+                                                                                              style: const TextStyle(fontSize: 11, color: Color(0xFF616768), fontWeight: FontWeight.normal),
+                                                                                            )
+                                                                                          : const Text(
+                                                                                              "0",
+                                                                                              style: TextStyle(fontSize: 11, color: Color(0xFF616768), fontWeight: FontWeight.normal),
+                                                                                            ),
+                                                                                      // text
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                          const SizedBox(
+                                                                            height:
+                                                                                2,
+                                                                          ),
+                                                                          Row(
+                                                                            children: [
+                                                                              Text(
+                                                                                nearbyLocations[index].types![0],
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                style: TextStyle(fontSize: 12, color: Colors.grey[500], fontWeight: FontWeight.normal),
+                                                                              ),
+                                                                              Text(
+                                                                                "",
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                style: TextStyle(fontSize: 11, color: Colors.grey[500], fontWeight: FontWeight.normal),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                          const SizedBox(
+                                                                            height:
+                                                                                2,
+                                                                          ),
+                                                                          Row(
+                                                                            children: [
+                                                                              Text(
+                                                                                nearbyLocations[index].businessStatus == "OPERATIONAL" ? "open" : "close",
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                style: TextStyle(fontSize: 12, color: Colors.grey[500], fontWeight: FontWeight.normal),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                          const SizedBox(
+                                                                            height:
+                                                                                10,
+                                                                          ),
+                                                                          Row(
+                                                                            children: [
+                                                                              Container(
+                                                                                height: 35,
+                                                                                child: TextButton(
+                                                                                  style: ButtonStyle(
+                                                                                    backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                                                                      borderRadius: BorderRadius.circular(50.0),
+                                                                                      side: const BorderSide(
+                                                                                        color: Color(0xFFDDE4E4),
+                                                                                      ),
+                                                                                    )),
+                                                                                    padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.only(
+                                                                                      left: 12,
+                                                                                      right: 12,
+                                                                                    )),
+                                                                                  ),
+                                                                                  onPressed: () {},
+                                                                                  child: Row(
+                                                                                    children: <Widget>[
+                                                                                      SvgPicture.asset(
+                                                                                        'assets/images/direction-icon.svg',
+                                                                                        width: 18,
+                                                                                        color: const Color(0xFF00B8CA),
+                                                                                      ),
+                                                                                      const SizedBox(
+                                                                                        width: 5,
+                                                                                      ),
+                                                                                      const Text(
+                                                                                        "Directions",
+                                                                                        style: TextStyle(fontSize: 11, color: Color(0xFF00B8CA), fontWeight: FontWeight.normal),
+                                                                                      ),
+                                                                                      // text
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              const SizedBox(width: 10),
+                                                                              Container(
+                                                                                height: 36,
+                                                                                decoration: BoxDecoration(
+                                                                                  borderRadius: BorderRadius.circular(25),
+                                                                                  gradient: const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
+                                                                                    Color.fromRGBO(31, 203, 220, 1),
+                                                                                    Color.fromRGBO(0, 184, 202, 1)
+                                                                                  ]),
+                                                                                ),
+                                                                                child: TextButton(
+                                                                                  style: TextButton.styleFrom(
+                                                                                    foregroundColor: Colors.white,
+                                                                                    padding: const EdgeInsets.only(left: 12, right: 12, top: 5.0, bottom: 5.0),
+                                                                                    textStyle: const TextStyle(fontSize: 13),
+                                                                                  ),
+                                                                                  onPressed: () async {
+                                                                                    pr4.show();
+
+                                                                                    SharedPreferences pre = await SharedPreferences.getInstance();
+                                                                                    final islogin = pre.getBool("islogin") ?? false;
+                                                                                    final userId = pre.getInt("userId") ?? 0;
+                                                                                    final struserId = userId.toString();
+                                                                                    final strlat = nearbyLocations[index].geometry?.location?.lat.toString();
+                                                                                    final strlng = nearbyLocations[index].geometry?.location?.lng.toString();
+                                                                                    final placeid = nearbyLocations[index].placeId!;
+
+                                                                                    http.Response response = await PinPlaces().insertPinPlaces(struserId, delightId, nearbyLocations[index].types![0], placeid, strlat!, strlng!, nearbyLocations[index].name!, "", nearbyLocations[index].vicinity!, "", "", "", "", "", "", "", "", nearbyLocations[index].photos![0].photoReference!, nearbyLocations[index].rating.toString(), "");
+
+                                                                                    print(response);
+
+                                                                                    var pinResponse = jsonDecode(response.body);
+                                                                                    var userResponse = PinThePlace.fromJson(pinResponse);
+
+                                                                                    if (userResponse.status == "200") {
+                                                                                      pr4.hide();
+
+                                                                                      Fluttertoast.showToast(msg: userResponse.message!, toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.green, textColor: Colors.white, fontSize: 16.0);
+                                                                                    } else {
+                                                                                      pr4.hide();
+
+                                                                                      Fluttertoast.showToast(msg: userResponse.message!, toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.green, textColor: Colors.white, fontSize: 16.0);
+                                                                                    }
+                                                                                  },
+                                                                                  child: Row(
+                                                                                    children: <Widget>[
+                                                                                      SvgPicture.asset(
+                                                                                        'assets/images/Pin-s.svg',
+                                                                                        width: 11,
+                                                                                        color: Colors.white,
+                                                                                      ),
+                                                                                      const SizedBox(
+                                                                                        width: 5,
+                                                                                      ),
+                                                                                      const Text(
+                                                                                        "Pinned",
+                                                                                        style: TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.normal),
+                                                                                      ),
+                                                                                      // text
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  )),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      )),
+                                                ),
+                                              )))
+                            ],
+                          )
+                        : Visibility(
+                            visible: isVisible,
+                            child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: ResponsiveSizer(builder:
+                                    (context, orientation, screenType) {
+                                  return Container(
+                                    padding: const EdgeInsets.all(10),
+                                    height: 25.h,
+                                    width: 100.w,
+                                    margin: EdgeInsets.all(0.5.dp),
+                                    decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10))),
+                                    child: Text(
+                                      "$kename  List Not Found",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 23.sp,
+                                          fontFamily: 'Poppins'),
+                                    ),
+                                  );
+                                }))))
+              ],
+            ),
+          ),
+          Visibility(
+            visible: isTextVisible,
+            child: Container(
+              margin: EdgeInsets.all(5),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton.extended(
+                  onPressed: () {
+                    _determinePosition1();
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('You might be interested in'),
+                            content: setupAlertDialoadContainer(),
+                          );
+                        });
+                  },
+                  elevation: 10,
+                  label: Text('Recommend'),
+                  hoverColor: Colors.lightBlueAccent,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     ));
@@ -1166,6 +1598,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
           kename = elightlistName1[index].delightName!;
           delight_Id = elightlistName1[index].id!;
           delightId = delight_Id.toString();
+          nearbyLocations1.clear();
+          editingController.text = "";
 
           // _determinePosition("food",_radius2);
 
@@ -1177,7 +1611,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             _determinePosition("restaurant|food", _radius2);
             kenameType = "restaurant|food";
           } else if (kename == "Bar") {
-            _determinePosition("bar", _radius2);
+            _determinePosition("bar|night_club", _radius2);
             kenameType = "bar";
           } else if (kename == "Shopping") {
             _determinePosition("shopping_mall", _radius2);
@@ -1635,15 +2069,17 @@ class _ExploreScreenState extends State<ExploreScreen> {
     var response = await http.get(url);
     nearByplaces = NearByplaces.fromJson(jsonDecode(response.body));
 
+    nearbyLocations1.clear();
     nearbyLocations.clear();
 
     if (nearByplaces.results != null) {
       for (int i = 0; i < nearByplaces.results!.length; i++) {
-        nearbyLocations.add(nearByplaces.results![i]);
+        // nearbyLocations.add(nearByplaces.results![i]);
+        nearbyLocations1.add(nearByplaces.results![i]);
       }
     }
-
     isVisible = true;
+    isTextVisible = true;
     setState(() {});
   }
 
@@ -1964,5 +2400,436 @@ class _ExploreScreenState extends State<ExploreScreen> {
     setState(() {});
 
     return position;
+  }
+
+  Widget setupAlertDialoadContainer() {
+    return Container(
+      height: 300.0, // Change as per your requirement
+      width: 300.0, // Change as per your requirement
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+              height: Dimensions.size160,
+              width: Dimensions.size600,
+              margin: EdgeInsets.only(
+                  left: Dimensions.size7,
+                  right: Dimensions.size10,
+                  bottom: Dimensions.size40),
+              child: nearbyLocations.isNotEmpty
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Container(
+                            height: Dimensions.size150,
+                            width: Dimensions.size600,
+                            margin: const EdgeInsets.all(5),
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: nearbyLocations.length,
+                                itemBuilder:
+                                    (context, int index) => GestureDetector(
+                                          onTap: () async {
+                                            SharedPreferences pre =
+                                                await SharedPreferences
+                                                    .getInstance();
+                                            pre.setString(
+                                                "placeId",
+                                                nearbyLocations[index]
+                                                    .placeId!);
+                                            //save String
+                                            Get.toNamed(
+                                                RouteHelper.getdetailsScreen());
+                                          },
+                                          child: SingleChildScrollView(
+                                            child: Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                margin: const EdgeInsets.all(5),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  gradient: const LinearGradient(
+                                                      begin: Alignment(
+                                                          6.123234262925839e-17,
+                                                          1),
+                                                      end: Alignment(-1,
+                                                          6.123234262925839e-17),
+                                                      colors: [
+                                                        Color.fromRGBO(
+                                                            255, 255, 255, 255),
+                                                        Color.fromRGBO(
+                                                            255, 255, 255, 255),
+                                                      ]),
+                                                ),
+                                                child: Container(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                  margin: const EdgeInsets.only(
+                                                    left: 0,
+                                                    right: 0,
+                                                    top: 0,
+                                                    bottom: 10,
+                                                  ),
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      2.5,
+                                                  child: Card(
+                                                    elevation: 5,
+                                                    shadowColor: Colors.black12,
+                                                    color: Colors.white,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              18),
+                                                    ),
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                            flex: 2, // 20%
+                                                            child: Container(
+                                                              height: 130,
+                                                              decoration: BoxDecoration(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20)),
+                                                              width: 100,
+                                                              margin:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      top: 10,
+                                                                      left: 10,
+                                                                      right: 10,
+                                                                      bottom:
+                                                                          10),
+                                                              child: ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20),
+                                                                // Image border
+                                                                child: SizedBox
+                                                                    .fromSize(
+                                                                  size: const Size
+                                                                      .fromRadius(
+                                                                      48),
+                                                                  // Image radius
+                                                                  child: nearbyLocations[index]
+                                                                              .photos?[
+                                                                                  0]
+                                                                              .photoReference ==
+                                                                          null
+                                                                      ? Image
+                                                                          .network(
+                                                                          nearbyLocations[index]
+                                                                              .icon!,
+                                                                          height:
+                                                                              Dimensions.size100,
+                                                                          width:
+                                                                              Dimensions.size100,
+                                                                        )
+                                                                      : getImage(
+                                                                          "${nearbyLocations[index].photos?[0].photoReference}",
+                                                                          "${nearbyLocations[index].photos?[0].width}") /*Image.network(nearbyLocations[index].icon!,)*/,
+                                                                ),
+                                                              ),
+                                                            )),
+                                                        Expanded(
+                                                            flex: 3, // 60%
+                                                            child:
+                                                                SingleChildScrollView(
+                                                              scrollDirection:
+                                                                  Axis.vertical,
+                                                              child: Container(
+                                                                margin:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left: 2,
+                                                                        right:
+                                                                            2,
+                                                                        top:
+                                                                            10),
+                                                                child: Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        Expanded(
+                                                                          child:
+                                                                              Text(
+                                                                            nearbyLocations[index].name!,
+                                                                            style: const TextStyle(
+                                                                                fontSize: 14,
+                                                                                color: Colors.black,
+                                                                                fontWeight: FontWeight.normal),
+                                                                          ),
+                                                                        ),
+                                                                        Container(
+                                                                          height:
+                                                                              30,
+                                                                          child:
+                                                                              TextButton(
+                                                                            style:
+                                                                                ButtonStyle(
+                                                                              backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                                                            ),
+                                                                            onPressed:
+                                                                                () {},
+                                                                            child:
+                                                                                Row(
+                                                                              children: <Widget>[
+                                                                                SvgPicture.asset(
+                                                                                  'assets/images/star.svg',
+                                                                                  width: 18,
+                                                                                  color: const Color(0xFFF9BF3A),
+                                                                                ),
+                                                                                const SizedBox(
+                                                                                  width: 2,
+                                                                                ),
+                                                                                nearbyLocations[index].rating != null
+                                                                                    ? Text(
+                                                                                        nearbyLocations[index].rating.toString(),
+                                                                                        style: const TextStyle(fontSize: 11, color: Color(0xFF616768), fontWeight: FontWeight.normal),
+                                                                                      )
+                                                                                    : const Text(
+                                                                                        "0",
+                                                                                        style: TextStyle(fontSize: 11, color: Color(0xFF616768), fontWeight: FontWeight.normal),
+                                                                                      ),
+                                                                                // text
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height: 2,
+                                                                    ),
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          nearbyLocations[index]
+                                                                              .types![0],
+                                                                          overflow:
+                                                                              TextOverflow.ellipsis,
+                                                                          style: TextStyle(
+                                                                              fontSize: 12,
+                                                                              color: Colors.grey[500],
+                                                                              fontWeight: FontWeight.normal),
+                                                                        ),
+                                                                        Text(
+                                                                          "",
+                                                                          overflow:
+                                                                              TextOverflow.ellipsis,
+                                                                          style: TextStyle(
+                                                                              fontSize: 11,
+                                                                              color: Colors.grey[500],
+                                                                              fontWeight: FontWeight.normal),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height: 2,
+                                                                    ),
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          nearbyLocations[index].businessStatus == "OPERATIONAL"
+                                                                              ? "open"
+                                                                              : "close",
+                                                                          overflow:
+                                                                              TextOverflow.ellipsis,
+                                                                          style: TextStyle(
+                                                                              fontSize: 12,
+                                                                              color: Colors.grey[500],
+                                                                              fontWeight: FontWeight.normal),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height:
+                                                                          10,
+                                                                    ),
+                                                                    Row(
+                                                                      children: [
+                                                                        Container(
+                                                                          height:
+                                                                              35,
+                                                                          child:
+                                                                              TextButton(
+                                                                            style:
+                                                                                ButtonStyle(
+                                                                              backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                                                                borderRadius: BorderRadius.circular(50.0),
+                                                                                side: const BorderSide(
+                                                                                  color: Color(0xFFDDE4E4),
+                                                                                ),
+                                                                              )),
+                                                                              padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.only(
+                                                                                left: 12,
+                                                                                right: 12,
+                                                                              )),
+                                                                            ),
+                                                                            onPressed:
+                                                                                () {},
+                                                                            child:
+                                                                                Row(
+                                                                              children: <Widget>[
+                                                                                SvgPicture.asset(
+                                                                                  'assets/images/direction-icon.svg',
+                                                                                  width: 18,
+                                                                                  color: const Color(0xFF00B8CA),
+                                                                                ),
+                                                                                const SizedBox(
+                                                                                  width: 5,
+                                                                                ),
+                                                                                const Text(
+                                                                                  "Directions",
+                                                                                  style: TextStyle(fontSize: 11, color: Color(0xFF00B8CA), fontWeight: FontWeight.normal),
+                                                                                ),
+                                                                                // text
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        const SizedBox(
+                                                                            width:
+                                                                                10),
+                                                                        Container(
+                                                                          height:
+                                                                              36,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(25),
+                                                                            gradient:
+                                                                                const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
+                                                                              Color.fromRGBO(31, 203, 220, 1),
+                                                                              Color.fromRGBO(0, 184, 202, 1)
+                                                                            ]),
+                                                                          ),
+                                                                          child:
+                                                                              TextButton(
+                                                                            style:
+                                                                                TextButton.styleFrom(
+                                                                              foregroundColor: Colors.white,
+                                                                              padding: const EdgeInsets.only(left: 12, right: 12, top: 5.0, bottom: 5.0),
+                                                                              textStyle: const TextStyle(fontSize: 13),
+                                                                            ),
+                                                                            onPressed:
+                                                                                () async {
+                                                                              ViewDialog(context: context).showLoadingIndicator("Pin Your Location Wait...", "", context);
+
+                                                                              SharedPreferences pre = await SharedPreferences.getInstance();
+                                                                              final islogin = pre.getBool("islogin") ?? false;
+                                                                              final userId = pre.getInt("userId") ?? 0;
+                                                                              final struserId = userId.toString();
+                                                                              final strlat = nearbyLocations[index].geometry?.location?.lat.toString();
+                                                                              final strlng = nearbyLocations[index].geometry?.location?.lng.toString();
+                                                                              final placeid = nearbyLocations[index].placeId!;
+
+                                                                              http.Response response = await PinPlaces().insertPinPlaces(struserId, delightId, nearbyLocations[index].types![0], placeid, strlat!, strlng!, nearbyLocations[index].name!, "", nearbyLocations[index].vicinity!, "", "", "", "", "", "", "", "", nearbyLocations[index].photos![0].photoReference!, nearbyLocations[index].rating.toString(), "");
+
+                                                                              print(response);
+
+                                                                              var pinResponse = jsonDecode(response.body);
+                                                                              var userResponse = PinThePlace.fromJson(pinResponse);
+
+                                                                              if (userResponse.status == "200") {
+                                                                                ViewDialog(context: context).hideOpenDialog();
+
+                                                                                Fluttertoast.showToast(msg: userResponse.message!, toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.green, textColor: Colors.white, fontSize: 16.0);
+                                                                              } else {
+                                                                                ViewDialog(context: context).hideOpenDialog();
+
+                                                                                Fluttertoast.showToast(msg: userResponse.message!, toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.green, textColor: Colors.white, fontSize: 16.0);
+                                                                              }
+                                                                            },
+                                                                            child:
+                                                                                Row(
+                                                                              children: <Widget>[
+                                                                                SvgPicture.asset(
+                                                                                  'assets/images/Pin-s.svg',
+                                                                                  width: 11,
+                                                                                  color: Colors.white,
+                                                                                ),
+                                                                                const SizedBox(
+                                                                                  width: 5,
+                                                                                ),
+                                                                                const Text(
+                                                                                  "Pinned",
+                                                                                  style: TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.normal),
+                                                                                ),
+                                                                                // text
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            )),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )),
+                                          ),
+                                        )))
+                      ],
+                    )
+                  : Visibility(
+                      visible: isVisible,
+                      child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: ResponsiveSizer(
+                              builder: (context, orientation, screenType) {
+                            return Container(
+                              padding: const EdgeInsets.all(10),
+                              height: 25.h,
+                              width: 100.w,
+                              margin: EdgeInsets.all(0.5.dp),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Text(
+                                "$kename  List Not Found",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 23.sp, fontFamily: 'Poppins'),
+                              ),
+                            );
+                          }))));
+        },
+      ),
+    );
   }
 }

@@ -27,17 +27,16 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences pre = await SharedPreferences.getInstance();
     bool islogin = pre.getBool("islogin") ?? false;
 
- //   FirebaseApp firebaseApp = await Firebase.initializeApp();
-  //  User? user = FirebaseAuth.instance.currentUser;
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    User? user = FirebaseAuth.instance.currentUser;
 
-     Get.offNamed(RouteHelper.getIntroScreen());
+   //  Get.offNamed(RouteHelper.getIntroScreen());
 
-   /* Timer(const Duration(seconds: 2),
+    Timer(const Duration(seconds: 2),
             () => islogin == false ? user != null ?  Get.toNamed(RouteHelper.getHomeScreenpage()) :
                 Get.offNamed(RouteHelper.getIntroScreen())
          : Get.offNamed(RouteHelper.getHomeScreenpage())
     );
-*/
 
 
     // if(islogin == false){
