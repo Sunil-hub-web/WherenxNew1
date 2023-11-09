@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wherenxnew1/UserScerrn/DelightsScreen.dart';
+import 'EventDetails.dart';
 import 'ExploreScreen.dart';
 import 'MyPinsScreen.dart';
 import 'UserProfile.dart';
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     DelightsScreen(),
     // const MenuScreen(),
     UserProfile(),
+    EventDetails()
   ];
 
 
@@ -64,8 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
               child: Container(
-                padding: const EdgeInsets.only(left: 7, top: 5, right: 7, bottom: 5,),
-                width: 22.w,
+                padding: const EdgeInsets.all(5,),
+                width: 17.w,
                 height: 4.h,
                 decoration: BoxDecoration(
                   gradient: pageIndex == 0 ? const LinearGradient(
@@ -90,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 5.w,
+                      width: 4.w,
                       height: 3.h,
                       child: Center(
                         child: pageIndex == 0
@@ -123,8 +125,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
               child: Container(
-                padding: const EdgeInsets.only(left: 7, top: 5, right: 7, bottom: 5,),
-                width: 22.w,
+                padding: const EdgeInsets.all(5,),
+                width: 17.w,
                 height: 4.h,
                 decoration: BoxDecoration(
                   gradient: pageIndex == 1 ? const LinearGradient(
@@ -149,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 5.w,
+                      width: 4.w,
                       height: 3.h,
                       child: Center(
                         child: pageIndex == 1
@@ -182,8 +184,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
               child: Container(
-                padding: const EdgeInsets.only(left: 7, top: 5, right: 7, bottom: 5,),
-                width: 22.w,
+                 padding: const EdgeInsets.all(5,),
+                width: 17.w,
                 height: 4.h,
                 decoration: BoxDecoration(
                   gradient: pageIndex == 2 ? const LinearGradient(
@@ -208,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 5.w,
+                      width: 4.w,
                       height: 3.h,
                       child: Center(
                         child: pageIndex == 2
@@ -241,8 +243,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
               child: Container(
-                padding: const EdgeInsets.only(left: 7, top: 5, right: 7, bottom: 5,),
-                width: 22.w,
+                padding: const EdgeInsets.all(5,),
+                width: 17.w,
                 height: 4.h,
                 decoration: BoxDecoration(
                   gradient: pageIndex == 3 ? const LinearGradient(
@@ -267,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 5.w,
+                      width: 4.w,
                       height: 3.h,
                       child: Center(
                         child: pageIndex == 3
@@ -282,6 +284,65 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       child: pageIndex == 3
                           ? Text("User",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13.sp,
+                          ))
+                          : const Text(""),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  pageIndex = 4;
+                });
+              },
+              child: Container(
+                 padding: const EdgeInsets.all(5,),
+                width: 17.w,
+                height: 4.h,
+                decoration: BoxDecoration(
+                  gradient: pageIndex == 4 ? const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFF1FCBDC),
+                      Color(0xFF00B8CA),
+                    ],
+                  ) : const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.white,
+                      Colors.white,
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(13.0),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 5.w,
+                      height: 3.h,
+                      child: Center(
+                        child: pageIndex == 4
+                            ? Image.asset(
+                          'assets/images/eventwhite.png',
+                        )
+                            : Image.asset(
+                          'assets/images/event.png',
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: pageIndex == 4
+                          ? Text("Event",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,

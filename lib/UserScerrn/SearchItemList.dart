@@ -53,6 +53,7 @@ class _SearchItemListState extends State<SearchItemList> {
   String googleApikey = "AIzaSyAuFYxq-RX0I1boI5HU5-olArirEi2Ez8k";
 
   Future<List<AllPinList>> showAppPin() async {
+
     SharedPreferences pre = await SharedPreferences.getInstance();
     islogin = pre.getBool("islogin") ?? false;
     userId = pre.getInt("userId") ?? 0;
@@ -95,12 +96,27 @@ class _SearchItemListState extends State<SearchItemList> {
   }
 
   void filterSearchResults(String query) {
+
     setState(() {
       items = userinfoPin
           .where((item) =>
               item.delightName!.toLowerCase().contains(query.toLowerCase()))
           .toList();
-      print("useritemlist${items.toString()}");
+
+      if (items.isEmpty) {
+        items = userinfoPin
+            .where((item) =>
+                item.name!.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      } else {
+        items = userinfoPin
+            .where((item) =>
+                item.delightName!.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      }
+
+      print("sterilise${items.toString()}");
+
     });
   }
 
@@ -450,32 +466,69 @@ class _SearchItemListState extends State<SearchItemList> {
                                                           Colors.transparent,
                                                       builder: (context) {
                                                         return GestureDetector(
-                                                          onTap: () => Navigator.of(context).pop(),
+                                                          onTap: () =>
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(),
                                                           child: Align(
-                                                            alignment: Alignment.bottomCenter,
+                                                            alignment: Alignment
+                                                                .bottomCenter,
                                                             child: Container(
-                                                                height: MediaQuery.of(context).size.height / 10,
-                                                                width: MediaQuery.of(context).size.width,
-                                                                margin: EdgeInsets.only(top: 20, left: 10, right: 10),
-                                                                decoration: BoxDecoration(
-                                                                  color: Color(0xFFffffff),
-                                                                  boxShadow: [BoxShadow(color: Colors.black12,
-                                                                      blurRadius: 5.0,
+                                                                height: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .height /
+                                                                    10,
+                                                                width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top: 20,
+                                                                        left:
+                                                                            10,
+                                                                        right:
+                                                                            10),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Color(
+                                                                      0xFFffffff),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .black12,
+                                                                      blurRadius:
+                                                                          5.0,
                                                                       // soften the shadow
-                                                                      spreadRadius: 5.0,
+                                                                      spreadRadius:
+                                                                          5.0,
                                                                       //extend the shadow
-                                                                      offset: Offset(1.0, // Move to right 5  horizontally
+                                                                      offset:
+                                                                          Offset(
+                                                                        1.0,
+                                                                        // Move to right 5  horizontally
                                                                         1.0, // Move to bottom 5 Vertically
                                                                       ),
                                                                     )
                                                                   ],
-                                                                  borderRadius: BorderRadius.circular(10),),
-                                                                alignment: Alignment.center,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10),
+                                                                ),
+                                                                alignment:
+                                                                    Alignment
+                                                                        .center,
                                                                 child: ListView(
-                                                                  scrollDirection: Axis.horizontal,
-                                                                  children: dataList.map((data) {
+                                                                  scrollDirection:
+                                                                      Axis.horizontal,
+                                                                  children:
+                                                                      dataList.map(
+                                                                          (data) {
                                                                     return InkWell(
-                                                                      onTap: () {
+                                                                      onTap:
+                                                                          () {
                                                                         if (data.name ==
                                                                             "Facebook") {
                                                                           onButtonTap(
@@ -654,7 +707,8 @@ class _SearchItemListState extends State<SearchItemList> {
   Image getImage(String photoReference) {
     var baseurl = "https://maps.googleapis.com/maps/api/place/photo";
     var maxWidth = "1000";
-    final url = "$baseurl?maxwidth=$maxWidth&photo_reference=$photoReference&key=$googleApikey";
+    final url =
+        "$baseurl?maxwidth=$maxWidth&photo_reference=$photoReference&key=$googleApikey";
     return Image.network(
       url,
       filterQuality: FilterQuality.high,

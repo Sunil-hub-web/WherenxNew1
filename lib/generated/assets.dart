@@ -37,9 +37,12 @@ class Assets {
   static const String imagesDrinkG = 'assets/images/drink-g.png';
   static const String imagesDrinkW = 'assets/images/drink-w.png';
   static const String imagesEditIcon = 'assets/images/edit-icon.svg';
+  static const String imagesEvent = 'assets/images/event.png';
   static const String imagesEventB = 'assets/images/Event-b.png';
   static const String imagesEventG = 'assets/images/Event-g.png';
   static const String imagesEventW = 'assets/images/Event-w.png';
+  static const String imagesEventimage = 'assets/images/eventimage.jpg';
+  static const String imagesEventwhite = 'assets/images/eventwhite.png';
   static const String imagesExploreG = 'assets/images/explore-g.png';
   static const String imagesExploreS = 'assets/images/explore-s.png';
   static const String imagesExploreW = 'assets/images/explore-w.png';
@@ -60,6 +63,7 @@ class Assets {
   static const String imagesHealthB = 'assets/images/health-b.png';
   static const String imagesHealthG = 'assets/images/health-g.png';
   static const String imagesHealthW = 'assets/images/health-w.png';
+  static const String imagesImages = 'assets/images/images.png';
   static const String imagesImg1 = 'assets/images/img-1.png';
   static const String imagesImg2 = 'assets/images/img-2.png';
   static const String imagesImg3 = 'assets/images/img-3.png';
@@ -117,6 +121,7 @@ class Assets {
   static const String imagesStarYellow = 'assets/images/star-yellow.png';
   static const String imagesTwitter = 'assets/images/twitter.png';
   static const String imagesTwitterShare = 'assets/images/twitter_share.png';
+  static const String imagesUploading = 'assets/images/uploading.png';
   static const String imagesUserB = 'assets/images/user-b.png';
   static const String imagesUserG = 'assets/images/user-g.png';
   static const String imagesUserG1 = 'assets/images/user-g1.png';

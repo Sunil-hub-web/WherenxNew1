@@ -143,6 +143,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   Future<List<ReviewDetails>> getReviewdetails() async {
+
     reviewDet.clear();
 
     SharedPreferences pre = await SharedPreferences.getInstance();
@@ -157,12 +158,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
     var reviewResponse = ViewReviewResponse.fromJson(jsonResponse);
 
     if (reviewResponse.reviewDetails!.isNotEmpty) {
+
       for (int i = 0; i < reviewResponse.reviewDetails!.length; i++) {
         reviewDet.add(reviewResponse.reviewDetails![i]);
       }
 
       reviewlength = reviewDet.length;
+
     } else {
+
       Fluttertoast.showToast(
           msg: reviewResponse.message!,
           toastLength: Toast.LENGTH_SHORT,
@@ -188,7 +192,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     String strUserid = userId.toString();
 
     http.Response? response = await ViewVideoReview()
-        .viewVideoReview(strUserid, "ChIJsdRyk7AJGToRVqKTJLymGjo");
+        .viewVideoReview(strUserid, placeId);
     var jsonResponse = json.decode(response!.body);
     var videoreviewResponse = ShowVideoReviewResponse.fromJson(jsonResponse);
 
@@ -199,7 +203,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
       videoreviewlength = videoreviewDet.length;
       isVisible = true;
+
     } else {
+
       Fluttertoast.showToast(
           msg: videoreviewResponse.message!,
           toastLength: Toast.LENGTH_SHORT,
@@ -210,6 +216,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           fontSize: 16.0);
 
       isVisible = false;
+
     }
 
     return videoreviewDet;
